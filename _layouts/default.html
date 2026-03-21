@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+    <meta name="description" content="{{ page.description | default: site.description }}">
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+    <script>
+      (function () {
+        var storedTheme = localStorage.getItem("theme");
+        var preferredDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        var theme = storedTheme || (preferredDark ? "dark" : "light");
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
+    </script>
+    {% seo %}
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="site-header">
+        <div class="brand-block">
+          <a class="site-title" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+          <p class="site-tagline">Research, publications, and notes</p>
+        </div>
+        <div class="header-actions">
+          <nav class="site-nav" aria-label="Primary">
+            <a href="{{ '/' | relative_url }}" {% if page.url == '/' %}aria-current="page"{% endif %}>Home</a>
+            <a href="{{ '/publications/' | relative_url }}" {% if page.url == '/publications/' %}aria-current="page"{% endif %}>Publications</a>
+            <a href="{{ '/teaching/' | relative_url }}" {% if page.url == '/teaching/' %}aria-current="page"{% endif %}>Teaching</a>
+            <a href="{{ '/talks/' | relative_url }}" {% if page.url == '/talks/' %}aria-current="page"{% endif %}>Talks</a>
+            <a href="{{ '/awards/' | relative_url }}" {% if page.url == '/awards/' %}aria-current="page"{% endif %}>Awards</a>
+            <a href="{{ '/services/' | relative_url }}" {% if page.url == '/services/' %}aria-current="page"{% endif %}>Services</a>
+            <a href="{{ '/blog/' | relative_url }}" {% if page.url == '/blog/' %}aria-current="page"{% endif %}>Blog</a>
+          </nav>
+          <button class="theme-toggle" type="button" id="theme-toggle" aria-label="Toggle color mode">
+            <span class="theme-toggle-light">Light</span>
+            <span class="theme-toggle-dark">Dark</span>
+          </button>
+        </div>
+      </header>
+
+      <main class="content-wrap">
+        {{ content }}
+      </main>
+
+      <footer class="site-footer">
+        <p>Built with Markdown, Jekyll, and GitHub Pages.</p>
+      </footer>
+    </div>
+
+    <script src="{{ '/assets/js/theme-toggle.js' | relative_url }}"></script>
+  </body>
+</html>
