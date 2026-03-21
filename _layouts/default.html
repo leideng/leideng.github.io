@@ -41,7 +41,38 @@
       </header>
 
       <main class="content-wrap">
-        {{ content }}
+        {% if page.hero_title %}
+        <section class="hero">
+          {% if page.hero_image %}
+          <div class="hero-photo">
+            <img src="{{ page.hero_image | relative_url }}" alt="{{ page.hero_image_alt | default: page.hero_title }}">
+          </div>
+          {% endif %}
+          <div class="hero-copy">
+            {% if page.kicker %}<p class="section-kicker">{{ page.kicker }}</p>{% endif %}
+            <h1>{{ page.hero_title }}</h1>
+            {% if page.lead %}<p class="lead">{{ page.lead }}</p>{% endif %}
+            {% if page.hero_intro %}<p>{{ page.hero_intro }}</p>{% endif %}
+            {% if page.hero_buttons %}
+            <div class="button-row">
+              {% for button in page.hero_buttons %}
+              <a class="button-link{% if button.style == 'secondary' %} secondary{% endif %}" href="{{ button.url }}">{{ button.label }}</a>
+              {% endfor %}
+            </div>
+            {% endif %}
+          </div>
+        </section>
+        {% elsif page.kicker or page.lead %}
+        <section class="page-header">
+          {% if page.kicker %}<p class="section-kicker">{{ page.kicker }}</p>{% endif %}
+          <h1>{{ page.header_title | default: page.title }}</h1>
+          {% if page.lead %}<p class="lead">{{ page.lead }}</p>{% endif %}
+        </section>
+        {% endif %}
+
+        <article class="markdown-body">
+          {{ content }}
+        </article>
       </main>
 
       <footer class="site-footer">

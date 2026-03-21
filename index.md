@@ -1,97 +1,63 @@
 ---
 title: Home
 description: Lei Deng personal website
+kicker: Personal Website
+hero_title: Lei Deng
+lead: Researcher working across efficient AI, sparse attention, and communication systems.
+hero_image: /photo.jpeg
+hero_image_alt: Portrait of Lei Deng
+hero_intro: The latest public profile attached to this site is the Google Scholar record for Lei Deng, which currently lists Hong Kong Theory Lab, Huawei and research interests including efficient AI and sparse attention. Earlier education and academic background from the previous site are preserved below.
+hero_buttons:
+  - label: View Publications
+    url: /publications/
+  - label: Read Blog
+    url: /blog/
+    style: secondary
+  - label: GitHub
+    url: https://github.com/leideng
+    style: secondary
+  - label: Google Scholar
+    url: https://scholar.google.com/citations?user=Bx2v5H8AAAAJ&hl=en
+    style: secondary
 ---
 
-<section class="hero">
-  <div class="hero-photo">
-    <img src="{{ '/photo.jpeg' | relative_url }}" alt="Portrait of Lei Deng">
-  </div>
-  <div class="hero-copy">
-    <p class="section-kicker">Personal Website</p>
-    <h1>Lei Deng</h1>
-    <p class="lead">Researcher working across efficient AI, sparse attention, and communication systems.</p>
-    <p>
-      The latest public profile attached to this site is the Google Scholar record for
-      <a href="https://scholar.google.com/citations?user=Bx2v5H8AAAAJ&hl=en">Lei Deng</a>,
-      which currently lists <strong>Hong Kong Theory Lab, Huawei</strong> and research interests including
-      efficient AI and sparse attention. Earlier education and academic background from the previous site are preserved below.
-    </p>
-    <div class="button-row">
-      <a class="button-link" href="{{ '/publications/' | relative_url }}">View Publications</a>
-      <a class="button-link secondary" href="{{ '/blog/' | relative_url }}">Read Blog</a>
-      <a class="button-link secondary" href="https://github.com/leideng">GitHub</a>
-      <a class="button-link secondary" href="https://scholar.google.com/citations?user=Bx2v5H8AAAAJ&hl=en">Google Scholar</a>
-    </div>
-  </div>
-</section>
+## Biography
 
-<section class="grid-two">
-  <div class="panel">
-    <h2>Biography</h2>
-    <p>
-      Lei Deng received a BEng from Shanghai Jiao Tong University in 2012 and a PhD from
-      The Chinese University of Hong Kong in 2017. Previous versions of this site listed an
-      assistant professorship at Shenzhen University and a postdoctoral appointment at CUHK.
-    </p>
-    <p>
-      The recent publication record indicates an active research focus spanning large language models,
-      multimodal learning, diffusion-based compression, and communication systems.
-    </p>
-  </div>
-  <div class="panel">
-    <h2>Research Areas</h2>
-    <ul class="stack-list">
-      <li>Efficient AI and sparse attention</li>
-      <li>Long-context language modeling</li>
-      <li>Multimodal adaptation and reasoning</li>
-      <li>Wireless and delay-constrained networking</li>
-      <li>Distributed storage and systems optimization</li>
-    </ul>
-  </div>
-</section>
+Lei Deng received a BEng from Shanghai Jiao Tong University in 2012 and a PhD from The Chinese University of Hong Kong in 2017. Previous versions of this site listed an assistant professorship at Shenzhen University and a postdoctoral appointment at CUHK.
 
-<section class="grid-two">
-  <div class="panel">
-    <h2>Contact</h2>
-    <ul class="meta-list">
-      <li>Email: <a href="mailto:ldeng.sjtu@gmail.com">ldeng.sjtu@gmail.com</a></li>
-      <li>Google Scholar: <a href="https://scholar.google.com/citations?user=Bx2v5H8AAAAJ&hl=en">profile</a></li>
-      <li>GitHub: <a href="https://github.com/leideng">@leideng</a></li>
-      <li>Website: <a href="https://leideng.github.io/">leideng.github.io</a></li>
-    </ul>
-  </div>
-  <div class="panel">
-    <h2>Recent Publications</h2>
-    <ul class="plain-list">
-      {% for publication in site.data.publications limit: 5 %}
-      <li>
-        <strong>{{ publication.title }}</strong><br>
-        <span class="pub-meta">{{ publication.venue }}, {{ publication.year }}</span>
-      </li>
-      {% endfor %}
-    </ul>
-    <p><a href="{{ '/publications/' | relative_url }}">See the full recent list</a></p>
-  </div>
-</section>
+The recent publication record indicates an active research focus spanning large language models, multimodal learning, diffusion-based compression, and communication systems.
 
-<section class="grid-two">
-  <div class="panel">
-    <h2>Notes</h2>
-    <p>
-      This site has been rebuilt as a Jekyll site where the content pages and blog posts are plain Markdown files.
-      It is intended to stay lightweight, editable, and easy to maintain directly on GitHub.
-    </p>
-  </div>
-  <div class="panel">
-    <h2>Latest Blog Posts</h2>
-    <ul class="post-list">
-      {% for post in site.posts limit: 3 %}
-      <li>
-        <a href="{{ post.url | relative_url }}">{{ post.title }}</a><br>
-        <span class="pub-meta">{{ post.date | date: "%B %-d, %Y" }}</span>
-      </li>
-      {% endfor %}
-    </ul>
-  </div>
-</section>
+## Research Areas
+
+- Efficient AI and sparse attention
+- Long-context language modeling
+- Multimodal adaptation and reasoning
+- Wireless and delay-constrained networking
+- Distributed storage and systems optimization
+
+## Contact
+
+- Email: [ldeng.sjtu@gmail.com](mailto:ldeng.sjtu@gmail.com)
+- Google Scholar: [profile](https://scholar.google.com/citations?user=Bx2v5H8AAAAJ&hl=en)
+- GitHub: [@leideng](https://github.com/leideng)
+- Website: [leideng.github.io](https://leideng.github.io/)
+
+## Recent Publications
+
+{% for publication in site.data.publications limit: 5 %}
+- **{{ publication.title }}**
+  {{ publication.venue }}, {{ publication.year }}
+{% endfor %}
+
+[See the full recent list]({{ '/publications/' | relative_url }})
+
+## Notes
+
+This site has been rebuilt as a Jekyll site where the content pages and blog posts are plain Markdown files. It is intended to stay lightweight, editable, and easy to maintain directly on GitHub.
+
+## Latest Blog Posts
+
+{% for post in site.posts limit: 3 %}
+- [{{ post.title }}]({{ post.url | relative_url }})
+  {{ post.date | date: "%B %-d, %Y" }}
+{% endfor %}
