@@ -98,14 +98,16 @@ img {
 
 .header-actions {
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 1rem;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.8rem;
 }
 
 .site-nav {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   justify-content: flex-end;
   gap: 0.6rem;
 }
@@ -446,7 +448,7 @@ blockquote {
   }
 
   .header-actions {
-    justify-items: start;
+    justify-content: flex-start;
   }
 }
 
