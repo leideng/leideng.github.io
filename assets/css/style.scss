@@ -147,10 +147,26 @@ img {
   transition: opacity 160ms ease, transform 160ms ease;
 }
 
-.theme-icon-moon {
+.theme-icon,
+.theme-icon-moon,
+.theme-icon-auto,
+.theme-icon-sun {
   position: absolute;
+}
+
+.theme-icon-moon {
   opacity: 0;
   transform: scale(0.7) rotate(-20deg);
+}
+
+.theme-icon-auto {
+  opacity: 0;
+  transform: scale(0.72) rotate(12deg);
+}
+
+.theme-icon-auto .auto-fill {
+  fill: currentColor;
+  stroke: none;
 }
 
 .theme-icon-sun {
@@ -164,6 +180,17 @@ img {
 }
 
 :root[data-theme="dark"] .theme-icon-moon {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+:root[data-mode="auto"] .theme-icon-sun,
+:root[data-mode="auto"] .theme-icon-moon {
+  opacity: 0;
+  transform: scale(0.72) rotate(12deg);
+}
+
+:root[data-mode="auto"] .theme-icon-auto {
   opacity: 1;
   transform: scale(1) rotate(0deg);
 }
