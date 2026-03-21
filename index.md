@@ -10,7 +10,7 @@ hero_intro: The latest public profile attached to this site is the Google Schola
 hero_buttons:
   - label: View Publications
     url: /publications/
-  - label: Read Blog
+  - label: Read Blogs
     url: /blog/
     style: secondary
   - label: GitHub
@@ -61,3 +61,10 @@ This site has been rebuilt as a Jekyll site where the content pages and blog pos
 - [{{ post.title }}]({{ post.url | relative_url }})
   {{ post.date | date: "%B %-d, %Y" }}
 {% endfor %}
+
+## More
+
+- [Teaching]({{ '/teaching/' | relative_url }})
+- [Talks]({{ '/talks/' | relative_url }})
+- [Awards]({{ '/awards/' | relative_url }})
+- [Services]({{ '/services/' | relative_url }})
