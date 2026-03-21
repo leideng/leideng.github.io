@@ -128,26 +128,61 @@ img {
 
 .theme-toggle {
   cursor: pointer;
-  font: inherit;
-  display: inline-flex;
-  gap: 0.45rem;
-  align-items: center;
+  display: inline-grid;
+  place-items: center;
+  width: 2.9rem;
+  height: 2.9rem;
+  padding: 0;
+  position: relative;
 }
 
-.theme-toggle-dark {
-  opacity: 0.55;
+.theme-icon {
+  width: 1.2rem;
+  height: 1.2rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: opacity 160ms ease, transform 160ms ease;
 }
 
-:root[data-theme="dark"] .theme-toggle-light {
-  opacity: 0.55;
+.theme-icon-moon {
+  position: absolute;
+  opacity: 0;
+  transform: scale(0.7) rotate(-20deg);
 }
 
-:root[data-theme="dark"] .theme-toggle-dark {
+.theme-icon-sun {
   opacity: 1;
+  transform: scale(1) rotate(0deg);
 }
 
-:root[data-theme="light"] .theme-toggle-light {
+:root[data-theme="dark"] .theme-icon-sun {
+  opacity: 0;
+  transform: scale(0.7) rotate(20deg);
+}
+
+:root[data-theme="dark"] .theme-icon-moon {
   opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+  background: var(--accent-soft);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .content-wrap {

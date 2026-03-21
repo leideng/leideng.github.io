@@ -33,9 +33,15 @@
             <a href="{{ '/services/' | relative_url }}" {% if page.url == '/services/' %}aria-current="page"{% endif %}>Services</a>
             <a href="{{ '/blog/' | relative_url }}" {% if page.url == '/blog/' %}aria-current="page"{% endif %}>Blog</a>
           </nav>
-          <button class="theme-toggle" type="button" id="theme-toggle" aria-label="Toggle color mode">
-            <span class="theme-toggle-light">Light</span>
-            <span class="theme-toggle-dark">Dark</span>
+          <button class="theme-toggle" type="button" id="theme-toggle" aria-label="Switch to dark mode" title="Toggle color mode">
+            <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="4.2"></circle>
+              <path d="M12 1.8v2.6M12 19.6v2.6M22.2 12h-2.6M4.4 12H1.8M19.2 4.8l-1.9 1.9M6.7 17.3l-1.9 1.9M19.2 19.2l-1.9-1.9M6.7 6.7 4.8 4.8"></path>
+            </svg>
+            <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20.2 14.3A8.6 8.6 0 0 1 9.7 3.8a8.9 8.9 0 1 0 10.5 10.5Z"></path>
+            </svg>
+            <span class="visually-hidden">Toggle color mode</span>
           </button>
         </div>
       </header>
