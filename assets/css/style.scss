@@ -174,8 +174,19 @@ img {
 }
 
 .hero-photo {
-  border-radius: 20px;
+  width: min(100%, 240px);
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
   overflow: hidden;
+  margin: 0 auto;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.hero-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .hero-copy h1,
