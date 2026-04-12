@@ -117,15 +117,16 @@ img {
 }
 
 .theme-toggle {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2.35rem;
-  height: 2.35rem;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: var(--panel);
-  color: var(--muted);
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #5c7391;
   cursor: pointer;
 }
 
@@ -136,6 +137,10 @@ img {
 }
 
 .theme-icon {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  display: block;
   width: 1rem;
   height: 1rem;
   fill: none;
@@ -145,16 +150,13 @@ img {
   stroke-linejoin: round;
 }
 
-.theme-icon-moon {
-  display: none;
-}
-
-:root[data-theme="dark"] .theme-icon-sun {
+:root[data-theme="light"] .theme-icon-sun,
+:root:not([data-theme]) .theme-icon-sun {
   display: none;
 }
 
 :root[data-theme="dark"] .theme-icon-moon {
-  display: block;
+  display: none;
 }
 
 .content-wrap {
