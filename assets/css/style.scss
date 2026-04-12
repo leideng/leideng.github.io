@@ -8,8 +8,19 @@
   --muted: #6f7782;
   --line: #e5e8eb;
   --accent: #b33a2b;
+  --panel: #ffffff;
   --max-width: 1120px;
   --sidebar-width: 230px;
+}
+
+:root[data-theme="dark"] {
+  --bg: #12161b;
+  --text: #c8d0d9;
+  --heading: #eef3f8;
+  --muted: #9aa6b4;
+  --line: #2c3440;
+  --accent: #e98474;
+  --panel: #161c22;
 }
 
 * {
@@ -72,6 +83,12 @@ img {
   font-weight: 700;
 }
 
+:root[data-theme="dark"] .site-title,
+:root[data-theme="dark"] .site-nav a,
+:root[data-theme="dark"] .site-tagline {
+  color: #b3c4da;
+}
+
 .site-title:hover,
 .site-title:focus {
   text-decoration: none;
@@ -99,6 +116,47 @@ img {
   font-weight: 600;
 }
 
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.35rem;
+  height: 2.35rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--panel);
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus {
+  color: var(--heading);
+  text-decoration: none;
+}
+
+.theme-icon {
+  width: 1rem;
+  height: 1rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.theme-icon-moon {
+  display: none;
+}
+
+:root[data-theme="dark"] .theme-icon-sun {
+  display: none;
+}
+
+:root[data-theme="dark"] .theme-icon-moon {
+  display: block;
+}
+
 .content-wrap {
   padding-top: 2.2rem;
 }
@@ -120,7 +178,7 @@ img {
   height: 170px;
   border-radius: 50%;
   object-fit: cover;
-  border: 6px solid #ffffff;
+  border: 6px solid var(--panel);
   box-shadow: 0 0 0 1px var(--line);
   margin-bottom: 0.9rem;
 }
