@@ -21,17 +21,10 @@
           <p class="site-tagline">Efficient AI, sparse attention, and theory-driven systems research</p>
         </div>
         <nav class="site-nav" aria-label="Primary">
-          {% if page.url == '/' %}
-          <a href="#about-me">About</a>
-          <a href="#research">Research</a>
-          <a href="#experience">Experience</a>
-          <a href="#papers">Papers</a>
-          <a href="#writing">Writing</a>
-          {% else %}
-          <a href="{{ '/' | relative_url }}">Home</a>
-          <a href="{{ '/publications/' | relative_url }}" {% if page.url == '/publications/' %}aria-current="page"{% endif %}>Publications</a>
-          <a href="{{ '/blog/' | relative_url }}" {% if page.url == '/blog/' %}aria-current="page"{% endif %}>Writing</a>
-          {% endif %}
+          <a href="{% if page.url == '/' %}#about{% else %}{{ '/' | relative_url }}#about{% endif %}">About</a>
+          <a href="{% if page.url == '/' %}#experience{% else %}{{ '/' | relative_url }}#experience{% endif %}">Experience</a>
+          <a href="{{ '/publications/' | relative_url }}" {% if page.url == '/publications/' or page.url == '/full-publications/' %}aria-current="page"{% endif %}>Paper</a>
+          <a href="{{ '/blog/' | relative_url }}" {% if page.url == '/blog/' %}aria-current="page"{% endif %}>Blog</a>
         </nav>
       </header>
 
@@ -43,9 +36,17 @@
             {% if page.profile_name %}<h1 class="profile-name">{{ page.profile_name }}</h1>{% endif %}
             {% if page.profile_role %}<p class="profile-role">{{ page.profile_role }}</p>{% endif %}
             {% if page.profile_affiliation %}<p class="profile-affiliation">{{ page.profile_affiliation }}</p>{% endif %}
-            {% if page.profile_location %}<p class="profile-meta">{{ page.profile_location }}</p>{% endif %}
+            {% if page.profile_location %}
+            <p class="profile-meta">
+              <img class="profile-meta-icon" src="{{ 'assets/icons/location.svg' | relative_url }}" alt="Location icon">
+              <span>{{ page.profile_location }}</span>
+            </p>
+            {% endif %}
             {% if page.profile_email %}
-            <p class="profile-meta"><a href="mailto:{{ page.profile_email }}">{{ page.profile_email }}</a></p>
+            <p class="profile-meta">
+              <img class="profile-meta-icon" src="{{ 'assets/icons/email.svg' | relative_url }}" alt="Email icon">
+              <a href="mailto:{{ page.profile_email }}">{{ page.profile_email }}</a>
+            </p>
             {% endif %}
             {% if page.profile_links %}
             <ul class="profile-links">
