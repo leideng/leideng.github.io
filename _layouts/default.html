@@ -22,7 +22,8 @@
         </div>
         <nav class="site-nav" aria-label="Primary">
           {% if page.url == '/' %}
-          <a href="#about">About</a>
+          <a href="#about-me">About</a>
+          <a href="#research">Research</a>
           <a href="#experience">Experience</a>
           <a href="#papers">Papers</a>
           <a href="#writing">Writing</a>
@@ -35,6 +36,38 @@
       </header>
 
       <main class="content-wrap">
+        {% if page.url == '/' %}
+        <div class="home-layout">
+          <aside class="profile-sidebar">
+            {% if page.profile_image %}
+            <img class="profile-photo" src="{{ page.profile_image | relative_url }}" alt="{{ page.profile_name | default: site.title }}">
+            {% endif %}
+            {% if page.profile_name %}<h1 class="profile-name">{{ page.profile_name }}</h1>{% endif %}
+            {% if page.profile_role %}<p class="profile-role">{{ page.profile_role }}</p>{% endif %}
+            {% if page.profile_affiliation %}<p class="profile-affiliation">{{ page.profile_affiliation }}</p>{% endif %}
+            {% if page.profile_location %}<p class="profile-meta">{{ page.profile_location }}</p>{% endif %}
+            {% if page.profile_email %}
+            <p class="profile-meta"><a href="mailto:{{ page.profile_email }}">{{ page.profile_email }}</a></p>
+            {% endif %}
+            {% if page.profile_links %}
+            <ul class="profile-links">
+              {% for link in page.profile_links %}
+              <li>
+                <a href="{{ link.url }}">
+                  {% if link.icon %}<img src="{{ link.icon | relative_url }}" alt="{{ link.label }} icon">{% endif %}
+                  <span>{{ link.label }}</span>
+                </a>
+              </li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+          </aside>
+
+          <article class="markdown-body home-main">
+            {{ content }}
+          </article>
+        </div>
+        {% else %}
         {% if page.kicker or page.lead %}
         <section class="page-header">
           {% if page.kicker %}<p class="section-kicker">{{ page.kicker }}</p>{% endif %}
@@ -46,6 +79,7 @@
         <article class="markdown-body">
           {{ content }}
         </article>
+        {% endif %}
       </main>
 
       <footer class="site-footer">
