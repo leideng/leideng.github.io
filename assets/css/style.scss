@@ -140,6 +140,21 @@ img {
   font-size: 0.95rem;
 }
 
+.profile-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.profile-meta-icon {
+  width: 0.95rem;
+  min-width: 0.95rem;
+  max-width: 0.95rem;
+  height: 0.95rem;
+  max-height: 0.95rem;
+  object-fit: contain;
+}
+
 .profile-links {
   list-style: none;
   padding: 0;
