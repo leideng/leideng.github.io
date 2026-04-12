@@ -39,9 +39,7 @@
         {% if page.url == '/' %}
         <div class="home-layout">
           <aside class="profile-sidebar">
-            {% if page.profile_image %}
-            <img class="profile-photo" src="{{ page.profile_image | relative_url }}" alt="{{ page.profile_name | default: site.title }}">
-            {% endif %}
+            <img class="profile-photo" src="{{ '/photo.jpeg' | relative_url }}" alt="{{ page.profile_name | default: site.title }}">
             {% if page.profile_name %}<h1 class="profile-name">{{ page.profile_name }}</h1>{% endif %}
             {% if page.profile_role %}<p class="profile-role">{{ page.profile_role }}</p>{% endif %}
             {% if page.profile_affiliation %}<p class="profile-affiliation">{{ page.profile_affiliation }}</p>{% endif %}
@@ -54,7 +52,7 @@
               {% for link in page.profile_links %}
               <li>
                 <a href="{{ link.url }}">
-                  {% if link.icon %}<img src="{{ link.icon | relative_url }}" alt="{{ link.label }} icon">{% endif %}
+                  {% if link.icon %}<img src="{{ link.icon }}" alt="{{ link.label }} icon">{% endif %}
                   <span>{{ link.label }}</span>
                 </a>
               </li>
