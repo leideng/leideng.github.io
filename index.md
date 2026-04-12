@@ -1,40 +1,46 @@
 ---
 title: Home
 description: Lei Deng works on efficient AI, sparse attention, and theory-informed machine learning systems.
+profile_image: /photo.jpeg
+profile_name: Lei Deng
+profile_role: Researcher and engineer in efficient AI
+profile_affiliation: Senior Researcher, Huawei Theory Lab
+profile_location: Hong Kong
+profile_email: ldeng.sjtu@gmail.com
+profile_links:
+  - label: LinkedIn
+    url: https://www.linkedin.com/in/lei-deng-0537564b/
+    icon: /assets/icons/linkedin.svg
+  - label: GitHub
+    url: https://github.com/leideng
+    icon: /assets/icons/github.svg
+  - label: Hugging Face
+    url: https://huggingface.co/leideng
+    icon: /assets/icons/huggingface.svg
+  - label: Google Scholar
+    url: https://scholar.google.com/citations?user=Bx2v5H8AAAAJ
+    icon: /assets/icons/googlescholar.svg
 ---
 
-# Lei Deng
+## About me
 
-![Lei Deng portrait](photo.jpeg)
+I am a researcher and engineer working on efficient AI, with a particular focus on sparse attention, long-context inference, and practical machine learning systems. My current work is grounded in a theoretical background built over fifteen years of research in networking, scheduling, distributed optimization, and communication systems.
 
-Researcher and engineer working on efficient AI.
+Since the rise of large language models, I have shifted my main research effort toward AI. What carried over from my earlier work is not only mathematical technique, but also a way of thinking about efficiency, constraints, tradeoffs, and deployable system design. I am especially interested in problems where theory and engineering need to reinforce each other.
 
-I work on sparse attention, long-context inference, and practical machine learning systems, bringing a theoretical foundation from networking, scheduling, and distributed optimization into modern AI research.
+My earlier research centered on networking theory, wireless systems, delay-constrained communication, and distributed control. That experience continues to shape how I approach modern AI problems: how to reason about limited memory, long context, sparse computation, and performance bottlenecks in systems that must work at scale.
 
-Over the past fifteen years, my work has spanned wireless networking theory, delay-constrained systems, distributed optimization, and, more recently, efficient AI. Since 2022, I have focused on problems around large models, especially how to make them faster, more scalable, and more deployable without losing rigor.
+## Research
 
-I value both ideas and implementation. My background in mathematical modeling helps me reason about structure and limits, while my engineering experience keeps the work grounded in systems that have to run, scale, and matter in practice.
+My current research interests include:
 
-Senior Researcher, Huawei Theory Lab, Hong Kong
+- efficient AI and sparse attention
+- long-context modeling and inference
+- theory-informed understanding of transformer behavior
+- compression, retrieval, and scalable model adaptation
+- implementation-minded research for large model systems
 
-[Email](mailto:ldeng.sjtu@gmail.com) | [Selected papers](/publications/) | [Full publications](/full-publications/) | [GitHub](https://github.com/leideng)
-
-[![LinkedIn icon](assets/icons/linkedin.svg)](https://www.linkedin.com/in/lei-deng-0537564b/) [![GitHub icon](assets/icons/github.svg)](https://github.com/leideng) [![Hugging Face icon](assets/icons/huggingface.svg)](https://huggingface.co/leideng) [![Google Scholar icon](assets/icons/googlescholar.svg)](https://scholar.google.com/citations?user=Bx2v5H8AAAAJ)
-
-## About
-
-I received my B.Eng. in Electronic Engineering from Shanghai Jiao Tong University in 2012 and my Ph.D. in Information Engineering from The Chinese University of Hong Kong in 2017. My earlier work focused on networking theory: wireless scheduling, delay-constrained communication, distributed systems, and control over networks.
-
-The arrival of large language models pushed me to re-center my research on AI. What carried over was not just technical experience, but a way of thinking: how to formalize tradeoffs, how to reason about capacity and efficiency, and how to turn theory into mechanisms that work under real system constraints.
-
-Today, I am most interested in efficient AI, especially sparse attention and long-context modeling. I am also interested in how theory can help explain model behavior, guide architectural choices, and sharpen engineering decisions.
-
-Current focus:
-
-- Sparse attention and efficient long-context inference
-- Theory-informed understanding of transformer behavior
-- Compression, retrieval, and scalable model adaptation
-- Implementation-minded research for large model systems
+I see myself as both a researcher and an engineer. In the LLM era, good ideas matter, but the ability to implement, test, and scale them matters just as much. A central theme of my work is turning theoretical structure into mechanisms that are useful in real AI systems.
 
 ## Experience
 
@@ -51,11 +57,11 @@ Current focus:
    Research collaboration in electrical and computer engineering.
 
 5. **Linux C/C++ Developer, Empiricus Capital Management** (2012-2013)  
-   Built high-frequency automated trading systems, an experience that reinforced my interest in performance-critical engineering.
+   Built high-frequency automated trading systems, which strengthened my interest in performance-critical implementation.
 
-My previous work on networking theory shaped how I approach AI problems: resource allocation, constrained optimization, system bottlenecks, and algorithmic efficiency. That background is particularly useful for efficient AI, where model quality, latency, memory, and throughput are tightly coupled.
+## Papers
 
-## Selected Papers
+Selected papers:
 
 1. **[HyLRA: Hybrid Layer Reuse Attention for Efficient Long-Context Inference](https://arxiv.org/abs/2602.00777)**  
    *arXiv, 2026*
@@ -75,12 +81,10 @@ My previous work on networking theory shaped how I approach AI problems: resourc
 6. **[Timely Wireless Flows with General Traffic Patterns: Capacity Region and Scheduling Algorithms](https://doi.org/10.1109/TNET.2017.2749513)**  
    *IEEE/ACM Transactions on Networking, 2017*
 
-This selection reflects the path from networking theory to efficient AI: formal analysis, constrained systems, and scalable algorithms.
-
-[Full publication list](/full-publications/) | [Google Scholar profile](https://scholar.google.com/citations?user=Bx2v5H8AAAAJ)
+The selected list reflects the path from networking theory to efficient AI. For a broader view, see the [selected publications page](/publications/) or the [full publications page](/full-publications/).
 
 ## Writing
 
-I will use this space for research notes, implementation lessons, and short essays on efficient AI, model systems, and theory-guided machine learning. New posts will be added here over time.
+I will use this space for research notes, implementation lessons, and short essays on efficient AI, long-context models, sparse computation, and theory-guided machine learning.
 
-[Writing archive](/blog/)
+For now, the main writing hub is the [writing page](/blog/).
