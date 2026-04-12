@@ -147,6 +147,7 @@ img {
 }
 
 .profile-links li {
+  list-style: none;
   margin-bottom: 0.75rem;
 }
 
@@ -165,9 +166,19 @@ img {
 }
 
 .profile-links img {
+  display: inline-block;
   width: 1rem;
+  min-width: 1rem;
+  max-width: 1rem;
   height: 1rem;
+  max-height: 1rem;
   flex: 0 0 auto;
+  object-fit: contain;
+  vertical-align: middle;
+}
+
+.profile-links li::marker {
+  content: "";
 }
 
 .home-main,
