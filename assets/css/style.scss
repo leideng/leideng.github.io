@@ -220,6 +220,7 @@ img {
   height: 0.95rem;
   max-height: 0.95rem;
   object-fit: contain;
+  color: #4c5560;
 }
 
 .profile-meta span,
@@ -274,10 +275,16 @@ img {
   flex: 0 0 auto;
   object-fit: contain;
   vertical-align: middle;
+  color: #2d333b;
 }
 
 .profile-links li::marker {
   content: "";
+}
+
+:root[data-theme="dark"] .profile-meta-icon,
+:root[data-theme="dark"] .profile-links img {
+  color: #c7d2e3;
 }
 
 .home-main,
