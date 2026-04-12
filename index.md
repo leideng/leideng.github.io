@@ -40,21 +40,3 @@ My current research interests include:
 - implementation-minded research for large model systems
 
 I see myself as both a researcher and an engineer. In the LLM era, good ideas matter, but the ability to implement, test, and scale them matters just as much. A central theme of my work is turning theoretical structure into mechanisms that are useful in real AI systems.
-
-## Experience
-{: #experience}
-
-1. **Senior Researcher, Huawei Theory Lab** (2022-present)  
-   Research on efficient AI, with emphasis on sparse attention, long-context modeling, and related theoretical tools.
-
-2. **Assistant Professor, Shenzhen University** (2019-2022)  
-   Research and teaching in networking, communication systems, and optimization.
-
-3. **Postdoctoral Researcher and Ph.D. Student, The Chinese University of Hong Kong** (2013-2019)  
-   Work on wireless networking, scheduling, delay-constrained systems, and mathematical foundations for communication networks.
-
-4. **Visiting Scholar, Purdue University** (2015)  
-   Research collaboration in electrical and computer engineering.
-
-5. **Linux C/C++ Developer, Empiricus Capital Management** (2012-2013)  
-   Built high-frequency automated trading systems, which strengthened my interest in performance-critical implementation.
