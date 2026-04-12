@@ -132,6 +132,24 @@ img {
   margin-top: 0;
 }
 
+.markdown-body img[alt="Lei Deng portrait"] {
+  width: min(220px, 48vw);
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 6px solid var(--paper);
+  box-shadow: 0 0 0 1px var(--line);
+  margin: 0 0 1.5rem;
+}
+
+.markdown-body img[alt$=" icon"] {
+  display: inline-block;
+  width: 1.45rem;
+  height: 1.45rem;
+  margin: 0 0.7rem 0 0;
+  vertical-align: middle;
+}
+
 .home-hero {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 240px;
