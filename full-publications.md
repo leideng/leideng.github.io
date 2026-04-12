@@ -10,6 +10,10 @@ For the most current version of this record, see [Google Scholar](https://schola
 
 ## 2026
 
+- **[A Mathematical Theory of Top-Sparse Attention via Total Variation Distance](https://arxiv.org/abs/2512.07647)**  
+  G Tzachristas, L Deng, I Tzachristas, G Zhang, R Chen.  
+  *ISIT, 2026.*
+
 - **[HyLRA: Hybrid Layer Reuse Attention for Efficient Long-Context Inference](https://arxiv.org/abs/2602.00777)**  
   X Ai, Q Yang, P Wang, L Deng, L Zhang, R Chen, G Zhang.  
   *arXiv preprint, 2026.*
@@ -19,10 +23,6 @@ For the most current version of this record, see [Google Scholar](https://schola
 - **[From Point to Flow: Enhancing Unsupervised Domain Adaptation with Flow Classification](https://doi.org/10.1109/TCSVT.2025.3642573)**  
   L Zhou, M Ye, N Li, S Tang, XQ Fan, L Deng, Z Lei, X Zhu.  
   *IEEE Transactions on Circuits and Systems for Video Technology, 2025.*
-
-- **[A Mathematical Theory of Top-Sparse Attention via Total Variation Distance](https://arxiv.org/abs/2512.07647)**  
-  G Tzachristas, L Deng, I Tzachristas, G Zhang, R Chen.  
-  *arXiv preprint, 2025.*
 
 - **[LEO Satellite Grouping-Based Resilient Hierarchical Routing for Large-Scale Constellation Networks](https://doi.org/10.1109/TVT.2025.3639280)**  
   X Liu, Z Zhang, X Qin, Y Liu, L Deng, L Zhang, J Chen, H Zhou.  
@@ -136,10 +136,6 @@ For the most current version of this record, see [Google Scholar](https://schola
   X Wang, X Liu, CT Cheng, L Deng, X Chen, F Xiao.  
   *IEEE Communications Letters, 2021.*
 
-- **[Technical Report for a Joint User Scheduling and Trajectory Planning Data Collection Strategy for the UAV-Assisted WSN](https://arxiv.org/abs/2103.00753)**  
-  X Wang, CT Cheng, L Deng, X Chen, F Xiao.  
-  *arXiv preprint, 2021.*
-
 ## 2020
 
 - **[Delay-Constrained Topology-Transparent Distributed Scheduling for MANETs](https://doi.org/10.1109/TVT.2020.3046856)**  
@@ -200,7 +196,7 @@ For the most current version of this record, see [Google Scholar](https://schola
 
 - **[An Optimal Algorithm for Online Non-Convex Learning](https://doi.org/10.1145/3224420)**  
   L Yang, L Deng, MH Hajiesmaili, C Tan, WS Wong.  
-  *Proceedings of the ACM on Measurement and Analysis of Computing Systems, 2018.*
+  *Proceedings of the ACM on Measurement and Analysis of Computing Systems (ACM SIGMETRICS), 2018.*
 
 - **[Dynamic Spectrum Allocation for Heterogeneous Cognitive Radio Networks with Multiple Channels](https://doi.org/10.1109/JSYST.2018.2822309)**  
   W Zhang, Y Sun, L Deng, CK Yeo, L Yang.  
