@@ -22,7 +22,7 @@
         </div>
         <nav class="site-nav" aria-label="Primary">
           <a href="{% if page.url == '/' %}#about{% else %}{{ '/' | relative_url }}#about{% endif %}">About</a>
-          <a href="{% if page.url == '/' %}#experience{% else %}{{ '/' | relative_url }}#experience{% endif %}">Experience</a>
+          <a href="{{ '/experience/' | relative_url }}" {% if page.url == '/experience/' %}aria-current="page"{% endif %}>Experience</a>
           <a href="{{ '/publications/' | relative_url }}" {% if page.url == '/publications/' or page.url == '/full-publications/' %}aria-current="page"{% endif %}>Paper</a>
           <a href="{{ '/blog/' | relative_url }}" {% if page.url == '/blog/' %}aria-current="page"{% endif %}>Blog</a>
         </nav>
