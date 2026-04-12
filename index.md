@@ -5,7 +5,7 @@ description: Lei Deng works on efficient AI, sparse attention, and theory-inform
 
 # Lei Deng
 
-![Lei Deng portrait]({{ '/photo.jpeg' | relative_url }})
+![Lei Deng portrait](photo.jpeg)
 
 Researcher and engineer working on efficient AI.
 
@@ -19,7 +19,7 @@ Senior Researcher, Huawei Theory Lab, Hong Kong
 
 [Email](mailto:ldeng.sjtu@gmail.com) | [Selected papers](/publications/) | [Full publications](/full-publications/) | [GitHub](https://github.com/leideng)
 
-[![LinkedIn icon]({{ '/assets/icons/linkedin.svg' | relative_url }})](https://www.linkedin.com/in/lei-deng-0537564b/) [![GitHub icon]({{ '/assets/icons/github.svg' | relative_url }})](https://github.com/leideng) [![Hugging Face icon]({{ '/assets/icons/huggingface.svg' | relative_url }})](https://huggingface.co/leideng) [![Google Scholar icon]({{ '/assets/icons/googlescholar.svg' | relative_url }})](https://scholar.google.com/citations?user=Bx2v5H8AAAAJ)
+[![LinkedIn icon](assets/icons/linkedin.svg)](https://www.linkedin.com/in/lei-deng-0537564b/) [![GitHub icon](assets/icons/github.svg)](https://github.com/leideng) [![Hugging Face icon](assets/icons/huggingface.svg)](https://huggingface.co/leideng) [![Google Scholar icon](assets/icons/googlescholar.svg)](https://scholar.google.com/citations?user=Bx2v5H8AAAAJ)
 
 ## About
 
