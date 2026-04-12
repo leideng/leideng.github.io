@@ -8,9 +8,6 @@ profile_affiliation: Senior Researcher, Huawei Theory Lab
 profile_location: Hong Kong
 profile_email: ldeng.sjtu@gmail.com
 profile_links:
-  - label: LinkedIn
-    url: https://www.linkedin.com/in/lei-deng-0537564b/
-    icon: assets/icons/linkedin.svg
   - label: GitHub
     url: https://github.com/leideng
     icon: assets/icons/github.svg
@@ -20,6 +17,9 @@ profile_links:
   - label: Google Scholar
     url: https://scholar.google.com/citations?user=Bx2v5H8AAAAJ
     icon: assets/icons/googlescholar.svg
+  - label: LinkedIn
+    url: https://www.linkedin.com/in/lei-deng-0537564b/
+    icon: assets/icons/linkedin.svg
 ---
 
 ## About me
