@@ -1,16 +1,18 @@
 ---
-title: Blog
-description: Blog posts by Lei Deng
-kicker: Blog
-header_title: Notes and Blog Posts
-lead: Each post lives in the repository as a Markdown file under `_posts`.
+title: Writing
+description: Writing and notes by Lei Deng on efficient AI, systems, and theory-guided machine learning.
+kicker: Writing
+header_title: Writing
+lead: This page will collect research notes, implementation writeups, and essays on efficient AI, sparse attention, and model systems.
 ---
 
-{% for post in site.posts %}
-## [{{ post.title }}]({{ post.url | relative_url }})
+Long-form writing will appear here over time.
 
-{{ post.date | date: "%B %-d, %Y" }}
+Likely themes include:
 
-{% if post.excerpt %}{{ post.excerpt | strip_html | strip | truncate: 180 }}{% endif %}
+- efficient AI and sparse attention
+- long-context inference and compression
+- theory-guided perspectives on large model behavior
+- engineering lessons from building and evaluating LLM systems
 
-{% endfor %}
+For now, the best overview of my work is the [home page](/), the [selected publications page](/publications/), and the [full publications page](/full-publications/).
