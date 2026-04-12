@@ -132,8 +132,9 @@ img {
   margin-top: 0;
 }
 
-.markdown-body img[alt="Lei Deng portrait"] {
+.markdown-body p > img[alt="Lei Deng portrait"] {
   width: min(220px, 48vw);
+  max-width: min(220px, 48vw);
   aspect-ratio: 1 / 1;
   object-fit: cover;
   border-radius: 50%;
@@ -142,12 +143,18 @@ img {
   margin: 0 0 1.5rem;
 }
 
-.markdown-body img[alt$=" icon"] {
+.markdown-body p a img[alt$=" icon"] {
   display: inline-block;
   width: 1.45rem;
+  max-width: 1.45rem;
   height: 1.45rem;
   margin: 0 0.7rem 0 0;
   vertical-align: middle;
+}
+
+.markdown-body p a:has(img[alt$=" icon"]) {
+  display: inline-block;
+  line-height: 1;
 }
 
 .home-hero {
