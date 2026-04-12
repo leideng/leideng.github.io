@@ -1,7 +1,7 @@
 ---
 title: Home
 description: Lei Deng works on efficient AI, sparse attention, and theory-informed machine learning systems.
-profile_image: /photo.jpeg
+profile_image: photo.jpeg
 profile_name: Lei Deng
 profile_role: Researcher and engineer in efficient AI
 profile_affiliation: Senior Researcher, Huawei Theory Lab
@@ -10,16 +10,16 @@ profile_email: ldeng.sjtu@gmail.com
 profile_links:
   - label: LinkedIn
     url: https://www.linkedin.com/in/lei-deng-0537564b/
-    icon: /assets/icons/linkedin.svg
+    icon: assets/icons/linkedin.svg
   - label: GitHub
     url: https://github.com/leideng
-    icon: /assets/icons/github.svg
+    icon: assets/icons/github.svg
   - label: Hugging Face
     url: https://huggingface.co/leideng
-    icon: /assets/icons/huggingface.svg
+    icon: assets/icons/huggingface.svg
   - label: Google Scholar
     url: https://scholar.google.com/citations?user=Bx2v5H8AAAAJ
-    icon: /assets/icons/googlescholar.svg
+    icon: assets/icons/googlescholar.svg
 ---
 
 ## About me
