@@ -14,19 +14,19 @@ lead: Research, academic, and engineering experience across efficient AI, networ
 
 2. **Assistant Professor, Shenzhen University** (July 2019-June 2022)  
    Shenzhen, Guangdong, China.  
-   College of Electronics and Information Engineering. Research and teaching in networking, communication systems, and optimization.
+   College of Electronics and Information Engineering. Research and teaching in multimedia networking and optimization, especially on real-time communications (RTC).
 
-3. **Postdoctoral Researcher / Research Assistant, The Chinese University of Hong Kong** (July 2017-June 2019)  
+3. **Postdoctoral Researcher, The Chinese University of Hong Kong** (July 2017-June 2019)  
    Hong Kong SAR.  
-   Department of Information Engineering. Work on wireless networking, scheduling, and delay-constrained systems.
+   Department of Information Engineering. Work on delay-constrained networking systems.
 
 4. **Ph.D. Student, The Chinese University of Hong Kong** (August 2013-June 2017)  
    Hong Kong SAR.  
-   Department of Information Engineering. Research on communication networks, scheduling, and mathematical foundations for networked systems.
+   Department of Information Engineering. Research on delay-constrained networking systems and mathematical foundations for networked systems.
 
 5. **Visiting Scholar, Purdue University** (May 2015-October 2015)  
    West Lafayette, Indiana, USA.  
-   School of Electrical and Computer Engineering. Research collaboration in electrical and computer engineering.
+   School of Electrical and Computer Engineering. Research collaboration in MDP-based networking scheduling theory.
 
 6. **Linux C/C++ Developer, Empiricus Capital Management LLC** (September 2012-August 2013)  
    Shanghai, China.  
