@@ -1,70 +1,84 @@
 ---
 title: Home
-description: Lei Deng personal website
-kicker: Personal Website
-hero_title: Lei Deng
-lead: Researcher working across efficient AI, sparse attention, and communication systems.
-hero_image: /photo.jpeg
-hero_image_alt: Portrait of Lei Deng
-hero_intro: The latest public profile attached to this site is the Google Scholar record for Lei Deng, which currently lists Hong Kong Theory Lab, Huawei and research interests including efficient AI and sparse attention. Earlier education and academic background from the previous site are preserved below.
-hero_buttons:
-  - label: View Publications
-    url: /publications/
-  - label: Read Blogs
-    url: /blog/
-    style: secondary
-  - label: GitHub
-    url: https://github.com/leideng
-    style: secondary
-  - label: Google Scholar
-    url: https://scholar.google.com/citations?user=Bx2v5H8AAAAJ&hl=en
-    style: secondary
+description: Lei Deng works on efficient AI, sparse attention, and theory-informed machine learning systems.
 ---
 
-## Biography
+# Lei Deng
 
-Lei Deng received a BEng from Shanghai Jiao Tong University in 2012 and a PhD from The Chinese University of Hong Kong in 2017. Previous versions of this site listed an assistant professorship at Shenzhen University and a postdoctoral appointment at CUHK.
+Researcher and engineer working on efficient AI.
 
-The recent publication record indicates an active research focus spanning large language models, multimodal learning, diffusion-based compression, and communication systems.
+I work on sparse attention, long-context inference, and practical machine learning systems, bringing a theoretical foundation from networking, scheduling, and distributed optimization into modern AI research.
 
-## Research Areas
+Over the past fifteen years, my work has spanned wireless networking theory, delay-constrained systems, distributed optimization, and, more recently, efficient AI. Since 2022, I have focused on problems around large models, especially how to make them faster, more scalable, and more deployable without losing rigor.
 
-- Efficient AI and sparse attention
-- Long-context language modeling
-- Multimodal adaptation and reasoning
-- Wireless and delay-constrained networking
-- Distributed storage and systems optimization
+I value both ideas and implementation. My background in mathematical modeling helps me reason about structure and limits, while my engineering experience keeps the work grounded in systems that have to run, scale, and matter in practice.
 
-## Contact
+Senior Researcher, Huawei Theory Lab, Hong Kong
 
-- Email: [ldeng.sjtu@gmail.com](mailto:ldeng.sjtu@gmail.com)
-- Google Scholar: [profile](https://scholar.google.com/citations?user=Bx2v5H8AAAAJ&hl=en)
-- GitHub: [@leideng](https://github.com/leideng)
-- Website: [leideng.github.io](https://leideng.github.io/)
+[Email](mailto:ldeng.sjtu@gmail.com) | [Selected papers](/publications/) | [Full publications](/full-publications/) | [GitHub](https://github.com/leideng)
 
-## Recent Publications
+[GitHub](https://github.com/leideng) | [Google Scholar](https://scholar.google.com/citations?user=Bx2v5H8AAAAJ) | [LinkedIn](https://www.linkedin.com/in/lei-deng-0537564b/) | [Hugging Face](https://huggingface.co/leideng)
 
-{% for publication in site.data.publications limit: 5 %}
-- **{{ publication.title }}**
-  {{ publication.venue }}, {{ publication.year }}
-{% endfor %}
+## About
 
-[See the full recent list]({{ '/publications/' | relative_url }})
+I received my B.Eng. in Electronic Engineering from Shanghai Jiao Tong University in 2012 and my Ph.D. in Information Engineering from The Chinese University of Hong Kong in 2017. My earlier work focused on networking theory: wireless scheduling, delay-constrained communication, distributed systems, and control over networks.
 
-## Notes
+The arrival of large language models pushed me to re-center my research on AI. What carried over was not just technical experience, but a way of thinking: how to formalize tradeoffs, how to reason about capacity and efficiency, and how to turn theory into mechanisms that work under real system constraints.
 
-This site has been rebuilt as a Jekyll site where the content pages and blog posts are plain Markdown files. It is intended to stay lightweight, editable, and easy to maintain directly on GitHub.
+Today, I am most interested in efficient AI, especially sparse attention and long-context modeling. I am also interested in how theory can help explain model behavior, guide architectural choices, and sharpen engineering decisions.
 
-## Latest Blog Posts
+Current focus:
 
-{% for post in site.posts limit: 3 %}
-- [{{ post.title }}]({{ post.url | relative_url }})
-  {{ post.date | date: "%B %-d, %Y" }}
-{% endfor %}
+- Sparse attention and efficient long-context inference
+- Theory-informed understanding of transformer behavior
+- Compression, retrieval, and scalable model adaptation
+- Implementation-minded research for large model systems
 
-## More
+## Experience
 
-- [Teaching]({{ '/teaching/' | relative_url }})
-- [Talks]({{ '/talks/' | relative_url }})
-- [Awards]({{ '/awards/' | relative_url }})
-- [Services]({{ '/services/' | relative_url }})
+1. **Senior Researcher, Huawei Theory Lab** (2022-present)  
+   Research on efficient AI, with emphasis on sparse attention, long-context modeling, and related theoretical tools.
+
+2. **Assistant Professor, Shenzhen University** (2019-2022)  
+   Research and teaching in networking, communication systems, and optimization.
+
+3. **Postdoctoral Researcher and Ph.D. Student, The Chinese University of Hong Kong** (2013-2019)  
+   Work on wireless networking, scheduling, delay-constrained systems, and mathematical foundations for communication networks.
+
+4. **Visiting Scholar, Purdue University** (2015)  
+   Research collaboration in electrical and computer engineering.
+
+5. **Linux C/C++ Developer, Empiricus Capital Management** (2012-2013)  
+   Built high-frequency automated trading systems, an experience that reinforced my interest in performance-critical engineering.
+
+My previous work on networking theory shaped how I approach AI problems: resource allocation, constrained optimization, system bottlenecks, and algorithmic efficiency. That background is particularly useful for efficient AI, where model quality, latency, memory, and throughput are tightly coupled.
+
+## Selected Papers
+
+1. **[HyLRA: Hybrid Layer Reuse Attention for Efficient Long-Context Inference](https://arxiv.org/abs/2602.00777)**  
+   *arXiv, 2026*
+
+2. **[A Mathematical Theory of Top-Sparse Attention via Total Variation Distance](https://arxiv.org/abs/2512.07647)**  
+   *arXiv, 2025*
+
+3. **[Extending Context Window of Large Language Models via Semantic Compression](https://aclanthology.org/2024.findings-acl.306/)**  
+   *Findings of ACL, 2024*
+
+4. **[Beyond Scaling Laws: Understanding Transformer Performance with Associative Memory](https://arxiv.org/abs/2405.08707)**  
+   *arXiv, 2024*
+
+5. **[A Tale of Two Metrics in Network Delay Optimization](https://doi.org/10.1109/TNET.2020.2983867)**  
+   *IEEE/ACM Transactions on Networking, 2020*
+
+6. **[Timely Wireless Flows with General Traffic Patterns: Capacity Region and Scheduling Algorithms](https://doi.org/10.1109/TNET.2017.2749513)**  
+   *IEEE/ACM Transactions on Networking, 2017*
+
+This selection reflects the path from networking theory to efficient AI: formal analysis, constrained systems, and scalable algorithms.
+
+[Full publication list](/full-publications/) | [Google Scholar profile](https://scholar.google.com/citations?user=Bx2v5H8AAAAJ)
+
+## Writing
+
+I will use this space for research notes, implementation lessons, and short essays on efficient AI, model systems, and theory-guided machine learning. New posts will be added here over time.
+
+[Writing archive](/blog/)
