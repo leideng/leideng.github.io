@@ -434,8 +434,9 @@ img {
   display: block;
   width: 100%;
   max-width: 100%;
+  max-height: min(70vh, 42rem);
   margin: 0 0 1rem;
-  overflow-x: auto;
+  overflow: auto;
   border-collapse: collapse;
 }
 
@@ -444,6 +445,7 @@ img {
   padding: 0.55rem 0.7rem;
   border: 1px solid var(--line);
   vertical-align: top;
+  white-space: nowrap;
 }
 
 .markdown-body th {
@@ -492,15 +494,20 @@ code {
 }
 
 pre {
-  overflow-x: auto;
+  max-height: min(70vh, 42rem);
+  overflow: auto;
   padding: 1rem;
   border: 1px solid var(--line);
   background: #fafbfc;
+  white-space: pre;
 }
 
 pre code {
   padding: 0;
   background: transparent;
+  white-space: inherit;
+  word-break: normal;
+  overflow-wrap: normal;
 }
 
 blockquote {

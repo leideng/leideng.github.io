@@ -284,7 +284,7 @@ On my A3 machine with 4*80=320 logic CPUs, this took **765 s (~12.8 min)**; I lo
 | Token byte length (non-special) | min 1, max 19, mean 6.60, std 2.82 |
 
 Also, here is the full training log for reference
-<details>
+<details markdown="1">
 <summary>Tokenizer Training Log</summary>
 
 ```text
@@ -423,7 +423,7 @@ After training, we can run `tok_eval.py` to see how many bytes each token repres
 
 I archived the full tables under [`dev/tok_eval_results/`](https://github.com/leideng/nanochat-ascend/tree/main/dev/tok_eval_results). Below is an excerpt from the log.
 
-<details>
+<details markdown="1">
 <summary>Tokenizer Evaluation Log</summary>
 
 ```text
@@ -1736,7 +1736,7 @@ bash runs/run_base_eval.sh
 
 The full d20 pretrain log is in [d20.pretrain.log](https://github.com/leideng/leideng.github.io/blob/main/_posts/d20.pretrain.log); a shortened version appears below.
 
-<details>
+<details markdown="1">
 <summary>d20 Pretraining Log (head/middle/tail samples only)</summary>
 
 ```
