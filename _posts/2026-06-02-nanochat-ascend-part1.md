@@ -104,7 +104,7 @@ $$
 where $\Sigma^0 = \lbrace\varepsilon\rbrace$ contains only the empty string.
 
 
-We can formulate the tokenization problem as a **lossless compression** problem. Fix a finite vocabulary $\mathcal{V}$ with $|\mathcal{V}| = V$ (for example token IDs $\lbrace 0,1,\cdots,V-1 \rbrace$). A byte string $\vec{x} \in \Sigma^{\ast}$ is the raw text we must recover exactly.
+We can formulate the tokenization problem as a **lossless compression** problem. Fix a finite vocabulary $\mathcal{V}$ with $\lvert\mathcal{V}\rvert = V$ (for example token IDs $\lbrace 0,1,\cdots,V-1 \rbrace$). A byte string $\vec{x} \in \Sigma^{\ast}$ is the raw text we must recover exactly.
 
 We seek an **encoder** and a **decoder**
 
@@ -159,7 +159,7 @@ Note that the space often "belongs to" the next word, not the previous one, and
 is often represented by `Ġ`.
 2. **Counting.** Count adjacent token pairs $(u,v)$ in the corpus. Note that an `aaa` block contributes two `aa`, not one.
 3. **Merging.** Let $(u^\star, v^\star)$ be the most frequent pair (ties broken arbitrarily). Append the merge $\mu^{\star} = (u^\star, v^\star)$ as a new byte string to the **merge list** whose rank is the next rank of the existing merge list, namely, `merge_list[\mu^*]=len(merge_list)`. Replace every **non-overlapping, left-to-right** occurrence of $u^\star v^\star$ in the corpus with that new symbol. The new corpus will be used for iteration.
-4. **Termination.** Stop after $V - |\Sigma|$ merges (or when no pair has count $\ge 2$).
+4. **Termination.** Stop after $V - \lvert\Sigma\rvert$ merges (or when no pair has count $\ge 2$).
 
 The merge list is the serialized output of training: it records **in which order** pairs were fused, and it will be used during encoding! The vocabulary is $\Sigma$ plus the byte strings yielded by each merge, which is simply the set of all keys in the merge list.
 
@@ -495,7 +495,7 @@ $$
 \vec{x} := (x_1, x_2, \cdots, x_l) = T_{enc}(\vec{s}) \in \mathcal{V}^{l}, \quad x_t \in \mathcal{V},
 $$
 
-with $|\mathcal{V}| = V$. On the other hand, any token sequence can be decoded to a language string. Thus, next we will only consider token sequences.
+with $\lvert\mathcal{V}\rvert = V$. On the other hand, any token sequence can be decoded to a language string. Thus, next we will only consider token sequences.
 
 
 We can formally model token sequence set and token sequence prediction problem as follows.
