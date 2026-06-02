@@ -22,12 +22,12 @@ Before diving into the details, I want to share a few lessons I took away from t
 > LLMs are probabilistic because of next-token prediction, so their outputs are unreliable by nature. It would be risky to treat them as ground truth and build everything on top of them without verification. Reliable tools, agents, and human judgment are essential if we want LLMs to actually boost productivity. I do not think AI will replace people outright, but it does raise the bar for what we need to know.
 
 The sections below walk through **nanochat-ascend** training (based on d20). Links to the code, data, tokenizer, and models:
-- Code: [nanochat-ascend](https://github.com/leideng/nanochat-ascend)
-- Dataset: [nanochat-ascend-dataset](https://huggingface.co/datasets/leideng/nanochat-ascend-dataset)
-- Tokenizer: [nanochat-ascend-tokenizer](https://huggingface.co/leideng/nanochat-ascend-tokenizer)
-- Pretrain/Base Model: [nanochat-ascend-d20-pt](https://huggingface.co/leideng/nanochat-ascend-d20-pt)
-- SFT Model: [nanochat-ascend-d20-sft-pt](https://huggingface.co/leideng/nanochat-ascend-d20-sft-pt)
-- RL Model: [nanochat-ascend-d20-rl-pt](https://huggingface.co/leideng/nanochat-ascend-d20-rl-pt)
+- Code: [https://github.com/leideng/nanochat-ascend](https://github.com/leideng/nanochat-ascend)
+- Dataset: [https://huggingface.co/datasets/leideng/nanochat-ascend-dataset](https://huggingface.co/datasets/leideng/nanochat-ascend-dataset)
+- Tokenizer: [https://huggingface.co/leideng/nanochat-ascend-tokenizer](https://huggingface.co/leideng/nanochat-ascend-tokenizer)
+- Pretrain/Base Model: [https://huggingface.co/leideng/nanochat-ascend-d20-pt](https://huggingface.co/leideng/nanochat-ascend-d20-pt)
+- SFT Model: [https://huggingface.co/leideng/nanochat-ascend-d20-sft-pt](https://huggingface.co/leideng/nanochat-ascend-d20-sft-pt)
+- RL Model: [https://huggingface.co/leideng/nanochat-ascend-d20-rl-pt](https://huggingface.co/leideng/nanochat-ascend-d20-rl-pt)
 
 ## 1. Tokenization
 
