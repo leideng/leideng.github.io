@@ -22,12 +22,12 @@ Before diving into the details, I want to share a few lessons I took away from t
 > LLMs are probabilistic because of next-token prediction, so their outputs are unreliable by nature. It would be risky to treat them as ground truth and build everything on top of them without verification. Reliable tools, agents, and human judgment are essential if we want LLMs to actually boost productivity. I do not think AI will replace people outright, but it does raise the bar for what we need to know.
 
 The sections below walk through **nanochat-ascend** training (based on d20). Links to the code, data, tokenizer, and models:
-- Code: https://github.com/leideng/nanochat-ascend
-- Dataset: https://huggingface.co/datasets/leideng/nanochat-ascend-dataset
-- Tokenizer: https://huggingface.co/leideng/nanochat-ascend-tokenizer
-- Pretrain/Base Model: https://huggingface.co/leideng/nanochat-ascend-d20-pt
-- SFT Model: https://huggingface.co/leideng/nanochat-ascend-d20-sft-pt
-- RL Model: https://huggingface.co/leideng/nanochat-ascend-d20-rl-pt
+- Code: [nanochat-ascend](https://github.com/leideng/nanochat-ascend)
+- Dataset: [nanochat-ascend-dataset](https://huggingface.co/datasets/leideng/nanochat-ascend-dataset)
+- Tokenizer: [nanochat-ascend-tokenizer](https://huggingface.co/leideng/nanochat-ascend-tokenizer)
+- Pretrain/Base Model: [nanochat-ascend-d20-pt](https://huggingface.co/leideng/nanochat-ascend-d20-pt)
+- SFT Model: [nanochat-ascend-d20-sft-pt](https://huggingface.co/leideng/nanochat-ascend-d20-sft-pt)
+- RL Model: [nanochat-ascend-d20-rl-pt](https://huggingface.co/leideng/nanochat-ascend-d20-rl-pt)
 
 ## 1. Tokenization
 
@@ -135,9 +135,9 @@ Thus, finding a globally optimal {::nomarkdown}$(T_{enc},T_{dec},\mathcal{V})${:
 
 ### 1.3. Byte-Pair Encoding (BPE) Algorithm
 
-**Byte-Pair Encoding (BPE)** is the subword tokenizer used in ChatGPT and it becomes the de facto standard in LLMs. It was introduced for compression by Gage (1994) [[3]](https://www.pennelynn.com/Documents/CUJ/HTML/94HTML/19940045.HTM) and adapted for NLP by Sennrich et al. (2016) [[4]](https://aclanthology.org/P16-1162/). Starting from the byte alphabet $\Sigma$, BPE greedily **merges the most frequent adjacent symbol pairs** until the vocabulary reaches size $V$.
+**Byte-Pair Encoding (BPE)** is the subword tokenizer used in ChatGPT and it becomes the de facto standard in LLMs. It was introduced for compression by Gage (1994) [[3]](http://www.pennelynn.com/Documents/CUJ/HTML/94HTML/19940045.HTM) and adapted for NLP by Sennrich et al. (2016) [[4]](https://aclanthology.org/P16-1162/). Starting from the byte alphabet $\Sigma$, BPE greedily **merges the most frequent adjacent symbol pairs** until the vocabulary reaches size $V$.
 
-The key data structure for BPE algorithm is the `mergeable_ranks` (I call it **merge list** though it is a dictionary), which is a dictionary from byte string (token string) to integer (rank, which is also token id). The ranks correspond to merge priorities. We can see OpenAI's educational implementation (slow but clear) at https://github.com/openai/tiktoken/blob/main/tiktoken/_educational.py.
+The key data structure for BPE algorithm is the `mergeable_ranks` (I call it **merge list** though it is a dictionary), which is a dictionary from byte string (token string) to integer (rank, which is also token id). The ranks correspond to merge priorities. We can see OpenAI's educational implementation (slow but clear) in [`tiktoken/_educational.py`](https://github.com/openai/tiktoken/blob/main/tiktoken/_educational.py).
 
 We can also see the merge list of `cl100k_base` trained by OpenAI,
 
@@ -1500,7 +1500,7 @@ For such documents, we generally chunk them into sequences of length {::nomarkdo
 The tail sequence will either be padded or packed into a sequence of length {::nomarkdown}$L_{\max}${:/nomarkdown}.
 
 However, in our `nanochat-ascend` project, Karpathy uses a different approach, which is crop-based best-fit packing algorithm.
-As shown in https://github.com/leideng/nanochat-ascend/blob/main/nanochat/dataloader.py, it works as follows
+As shown in [`nanochat/dataloader.py`](https://github.com/leideng/nanochat-ascend/blob/main/nanochat/dataloader.py), it works as follows
 - Every row starts with BOS token
 - Documents packed using best-fit algorithm to minimize cropping
 - When no document fits remaining space, crops a document to fill exactly
@@ -1696,7 +1696,7 @@ $$
 
 > **Note**
 >
-> In practice (and also in this nanochat-ascend project), we do not use SGD but AdamW/Muon algorithms. In particular, we use AdamW to optimize the embeddings and scalars, and use Muon to optimize the matrix parameters. See the code in https://github.com/leideng/nanochat-ascend/blob/main/nanochat/optim.py. However, their basic ideas are still SGD but has better performance. I will discuss them some days later when I have time. For the time being, it is enough to understand the mini-batch SGD algorithm.
+> In practice (and also in this nanochat-ascend project), we do not use SGD but AdamW/Muon algorithms. In particular, we use AdamW to optimize the embeddings and scalars, and use Muon to optimize the matrix parameters. See the code in [`nanochat/optim.py`](https://github.com/leideng/nanochat-ascend/blob/main/nanochat/optim.py). However, their basic ideas are still SGD but has better performance. I will discuss them some days later when I have time. For the time being, it is enough to understand the mini-batch SGD algorithm.
 
 ### 3.7. Pretraining Running and Logs
 
@@ -1923,7 +1923,7 @@ Base-model performance is documented in the [nanochat-ascend README](https://git
 
 | Reference | Source |
 | --- | --- |
-| nanochat-ascend d20 — pretraining | [base-model-training.md](https://github.com/leideng/nanochat-ascend/blob/v0.1//dev/d20_eval_results/base-model-training.md) |
+| nanochat-ascend d20 — pretraining | [base-model-training.md](https://github.com/leideng/nanochat-ascend/blob/v0.1/dev/d20_eval_results/base-model-training.md) |
 | nanochat-ascend d20 — base evaluation | [base-model-evaluation.md](https://github.com/leideng/nanochat-ascend/blob/v0.1/dev/d20_eval_results/base-model-evaluation.md) |
 | nanochat-ascend d32 — pretraining | [base-model-training (iter 16k–17k).md](https://github.com/leideng/nanochat-ascend/blob/v0.1/dev/d32_eval_results/base-model-training-iter-from-16000-to-17000.md) |
 | nanochat-ascend d32 — base evaluation | [base-model-evaluation.md](https://github.com/leideng/nanochat-ascend/blob/v0.1/dev/d32_eval_results/base-model-evaluation.md) |
@@ -1949,13 +1949,13 @@ The table below compares base pretraining runs against upstream nanochat. Depth 
 
 ## References
 
-- [1] Philip Whittington, Gregor Bachmann, and Tiago Pimentel. *Tokenisation is NP-Complete.* ACL, 2025. https://aclanthology.org/2025.acl-long.1365.pdf
-- [2] V. Zouhar, C. Meister, J. Gastaldi, L. Du, T. Vieira, M. Sachan, and R. Cotterell. *A Formal Perspective on Byte-Pair Encoding.* ACL Findings, 2023. https://aclanthology.org/2023.findings-acl.38v2.pdf
-- [3] Philip Gage. *A New Algorithm for Data Compression.* The C Users Journal, 12(2):23–38, 1994. https://www.pennelynn.com/Documents/CUJ/HTML/94HTML/19940045.HTM
-- [4] Rico Sennrich, Barry Haddow, and Alexandra Birch. *Neural Machine Translation of Rare Words with Subword Units.* ACL, 2016. https://aclanthology.org/P16-1162/
-- [5] Li Du, Lucas Torroba Hennigen, Tiago Pimentel, Clara Meister, Jason Eisner, and Ryan Cotterell. *A Measure-Theoretic Characterization of Tight Language Models.* ACL, 2023. https://aclanthology.org/2023.acl-long.543.pdf
-- [6] Alec Radford, Jeffrey Wu, Rewon Child, David Luan, Dario Amodei, and Ilya Sutskever. *Language Models are Unsupervised Multitask Learners.* OpenAI, 2019. https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf
-- [7] Ilya Sutskever, Oriol Vinyals, and Quoc V. Le. *Sequence to Sequence Learning with Neural Networks.* NeurIPS, 2014. https://arxiv.org/pdf/1409.3215
-- [8] Gian Wiher, Clara Meister, and Ryan Cotterell. *On Decoding Strategies for Neural Text Generators.* TACL, 2022. https://aclanthology.org/2022.tacl-1.58/
-- [9] Jared Kaplan, Sam McCandlish, Tom Henighan, Tom B. Brown, Benjamin Chess, Rewon Child, Scott Gray, Alec Radford, Jeffrey Wu, and Dario Amodei. *Scaling Laws for Neural Language Models.* arXiv, 2020. https://arxiv.org/abs/2001.08361
-- [10] DeepSeek-AI. *DeepSeek-V4.* 2025. https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro/blob/main/DeepSeek_V4.pdf
+- [1] Philip Whittington, Gregor Bachmann, and Tiago Pimentel. *Tokenisation is NP-Complete.* ACL, 2025. [PDF](https://aclanthology.org/2025.acl-long.1365.pdf)
+- [2] V. Zouhar, C. Meister, J. Gastaldi, L. Du, T. Vieira, M. Sachan, and R. Cotterell. *A Formal Perspective on Byte-Pair Encoding.* ACL Findings, 2023. [PDF](https://aclanthology.org/2023.findings-acl.38v2.pdf)
+- [3] Philip Gage. *A New Algorithm for Data Compression.* The C Users Journal, 12(2):23–38, 1994. [Article](http://www.pennelynn.com/Documents/CUJ/HTML/94HTML/19940045.HTM)
+- [4] Rico Sennrich, Barry Haddow, and Alexandra Birch. *Neural Machine Translation of Rare Words with Subword Units.* ACL, 2016. [Paper](https://aclanthology.org/P16-1162/)
+- [5] Li Du, Lucas Torroba Hennigen, Tiago Pimentel, Clara Meister, Jason Eisner, and Ryan Cotterell. *A Measure-Theoretic Characterization of Tight Language Models.* ACL, 2023. [PDF](https://aclanthology.org/2023.acl-long.543.pdf)
+- [6] Alec Radford, Jeffrey Wu, Rewon Child, David Luan, Dario Amodei, and Ilya Sutskever. *Language Models are Unsupervised Multitask Learners.* OpenAI, 2019. [PDF](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf)
+- [7] Ilya Sutskever, Oriol Vinyals, and Quoc V. Le. *Sequence to Sequence Learning with Neural Networks.* NeurIPS, 2014. [PDF](https://arxiv.org/pdf/1409.3215)
+- [8] Gian Wiher, Clara Meister, and Ryan Cotterell. *On Decoding Strategies for Neural Text Generators.* TACL, 2022. [Paper](https://aclanthology.org/2022.tacl-1.58/)
+- [9] Jared Kaplan, Sam McCandlish, Tom Henighan, Tom B. Brown, Benjamin Chess, Rewon Child, Scott Gray, Alec Radford, Jeffrey Wu, and Dario Amodei. *Scaling Laws for Neural Language Models.* arXiv, 2020. [Paper](https://arxiv.org/abs/2001.08361)
+- [10] DeepSeek-AI. *DeepSeek-V4.* 2025. [PDF](https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro/blob/main/DeepSeek_V4.pdf)
