@@ -514,7 +514,11 @@ Note that we do not add `<eos>` special token since `<bos>` also marks the end o
 Thus, a valid token sequence becomes
 
 $$
-\vec{X} = (X_1=\text{\lt bos\gt}, X_2, \dots, X_{L-1}, X_L=\text{\lt bos\gt}), \quad X_2,\dots,X_{L-1} \neq \text{bos}, \quad L \ge 2
+\begin{aligned}
+\vec{X}
+&= (X_1=\text{\lt bos\gt}, X_2, \dots, X_{L-1}, X_L=\text{\lt bos\gt}), \\
+&\qquad X_2,\dots,X_{L-1} \neq \text{\lt bos\gt}, \quad L \ge 2.
+\end{aligned}
 $$
 
 In addition, due to the limited computation capability, we cannot handle arbitrary long sequences. Thus, we will impose a context window {::nomarkdown}$L_{\max}${:/nomarkdown} restriction and we require that {::nomarkdown}$L \le L_{\max}${:/nomarkdown}.
@@ -566,8 +570,8 @@ P_{\text{truth}}(X_1=a)
 P_{\text{truth}}(\vec{\omega}) \\
 &=
 \begin{cases}
-    1; \text{ if a=\text{\lt bos\gt}}  \\
-    0; \text{ otherwise.}
+    1, & \text{if } a=\text{\lt bos\gt},  \\
+    0, & \text{otherwise.}
 \end{cases}
 \end{aligned}
 $$
@@ -589,7 +593,7 @@ P_{\text{truth}}(\vec{\omega})
 \end{aligned}
 $$
 
-For notation simplicity, we sometimes omit the random varialbe {::nomarkdown}$X_i${:/nomarkdown} but simply use {::nomarkdown}$\omega_i/x_i/y_i${:/nomarkdown} when the context is clear to show that {::nomarkdown}$\omega_i/x_i/y_i${:/nomarkdown} is the $i$-th token in a sequence, namely
+For notation simplicity, we sometimes omit the random variable {::nomarkdown}$X_i${:/nomarkdown} but simply use {::nomarkdown}$\omega_i/x_i/y_i${:/nomarkdown} when the context is clear to show that {::nomarkdown}$\omega_i/x_i/y_i${:/nomarkdown} is the $i$-th token in a sequence, namely
 
 $$
 \begin{aligned}
@@ -621,8 +625,8 @@ the valid token sequence in {::nomarkdown}$\Omega_{\text{truth}}${:/nomarkdown} 
 $$
 \begin{aligned}
 \vec{y^*}
-&:= \argmax_{\vec{y}: (\vec{x},\vec{y}) \in \Omega_{\text{truth}}}  P_{\text{truth}}( \vec{x},\vec{y} ) \\
-&= \argmax_{\vec{y}: (\vec{x},\vec{y}) \in \Omega_{\text{truth}}}  P_{\text{truth}} ( \vec{y} | \vec{x} ).
+&:= \arg\max_{\vec{y}: (\vec{x},\vec{y}) \in \Omega_{\text{truth}}}  P_{\text{truth}}( \vec{x},\vec{y} ) \\
+&= \arg\max_{\vec{y}: (\vec{x},\vec{y}) \in \Omega_{\text{truth}}}  P_{\text{truth}} ( \vec{y} \mid \vec{x} ).
 \end{aligned}
 $$
 
@@ -641,14 +645,14 @@ By the chain rule, we have
 
 $$
 \begin{aligned}
-P_{\text{truth}} ( \vec{y} | \vec{x} )
+P_{\text{truth}} ( \vec{y} \mid \vec{x} )
 &= \prod_{t=i}^{l} P_{\text{truth}} (y_t \mid x_1,x_2,\cdots,x_{i-1}, y_i, \cdots, y_{t-1}), \\
 &\qquad i \ge 1
 \end{aligned}
 $$
 
 with the convention {::nomarkdown}$P_{\text{truth}}(X_1 = \text{\lt bos\gt} \mid \emptyset) = 1${:/nomarkdown}.
-Now we have factorized the conditional probability {::nomarkdown}$P_{\text{truth}} ( \vec{y} | \vec{x} )${:/nomarkdown} into $l-i+1$ next-token
+Now we have factorized the conditional probability {::nomarkdown}$P_{\text{truth}} ( \vec{y} \mid \vec{x} )${:/nomarkdown} into $l-i+1$ next-token
 conditional probabilities {::nomarkdown}$P_{\text{truth}} (y_t \mid x_1,x_2,\cdots,x_{i-1}, y_i, \cdots, y_{t-1})${:/nomarkdown}.
 
 
@@ -673,14 +677,14 @@ P_{\text{truth}} (\omega_t \mid \vec{\omega}_{\lt t})
 \sum\limits_{\substack{\vec{\nu} \in \Omega_{\text{truth}} \\ \nu_{\lt t} = \omega_{\lt t},\, \nu_t=\omega_t}}
 P_{\text{truth}} (\vec{\nu})
 }{
-\sum\limits_{\substack{\vec{\nu} \in \Omega_{\text{truth}} \\ \nu_{\lt t} = \nu_{\lt t}}}
+\sum\limits_{\substack{\vec{\nu} \in \Omega_{\text{truth}} \\ \nu_{\lt t} = \omega_{\lt t}}}
 P_{\text{truth}} (\vec{\nu})
 }
 \end{aligned}
 $$
 
 Therefore, chain-rule factorization does not reduce the computational or modeling complexity. We now make a fundamental causal assumption,
-which severs as the foundation for next-token prediction paradigm.
+which serves as the foundation for next-token prediction paradigm.
 
 **Causal Assumption**. Each token's probability is conditioned only on all preceding tokens, never on future tokens. Namely, we have
 
@@ -786,16 +790,16 @@ The natural way to solve this **token-level** local optimality problem is to loo
 we need to find a neural network with parameter $\theta$ such that
 
 $$
-P_{\theta} ( \vec{y} | \vec{x} ) = \prod_{t=i}^{l} P_{\theta} (y_t \mid x_1,x_2,\cdots,x_{i-1}, y_i, \cdots, y_{t-1}),
+P_{\theta} ( \vec{y} \mid \vec{x} ) = \prod_{t=i}^{l} P_{\theta} (y_t \mid x_1,x_2,\cdots,x_{i-1}, y_i, \cdots, y_{t-1}),
 $$
 
-is as close to {::nomarkdown}$P_{\text{truth}} ( \vec{y} | \vec{x} )${:/nomarkdown} as possible.
+is as close to {::nomarkdown}$P_{\text{truth}} ( \vec{y} \mid \vec{x} )${:/nomarkdown} as possible.
 
 We also call {::nomarkdown}$P_{\theta}${:/nomarkdown} the probability measure over the sample space {::nomarkdown}$\Omega_{\theta}${:/nomarkdown} determined by neural network with parameter $\theta$. Equivalently,
 we also aim at {::nomarkdown}$P_{\theta}${:/nomarkdown} over {::nomarkdown}$\Omega_{\theta}${:/nomarkdown} as close to {::nomarkdown}$P_{\text{truth}}${:/nomarkdown} over {::nomarkdown}$\Omega_{\text{truth}}${:/nomarkdown} as possible. In the next section, we will describe the theory of pretraining, which is
 try to use {::nomarkdown}$P_{\theta}${:/nomarkdown} to approximate {::nomarkdown}$P_{\text{truth}}${:/nomarkdown} via the NTP-based token-level conditional probabilities {::nomarkdown}$P_{\theta}(\,\cdot\mid \vec{\omega}_{\lt t})${:/nomarkdown}.
 
-## 3. Theory of Pretraining (Indepdent of Neural Network Architectures)
+## 3. Theory of Pretraining (Independent of Neural Network Architectures)
 
 Based on the previous NTP paradigm, I will introduce the theory of pretraining, which is independent of adopted neural network architectures. We just assume
 a general neural network with parameters $\theta$ which define the estimated/predicted probability measure {::nomarkdown}$P_{\theta}${:/nomarkdown} over the sample
@@ -836,9 +840,9 @@ and contributes once  for the following *token-level* input-output pairs
 
 > **Note**
 >
-> Note that we use supscript to denote the data sample index and use subscript to denote the token position index.
+> Note that we use superscript to denote the data sample index and use subscript to denote the token position index.
 
-During pretraining, we drive the model to have as much world knowledge as possible via scaling $N \to \infty$, and we do not drive the model to solve specific language tasks $P(\vec{y}|\vec{x})$. Therefore, we only care about the whole sequence {::nomarkdown}$(x^n_1, x^n_2, \cdots, x^n_{l_n})${:/nomarkdown}. Or equivalently we only consider $P(\vec{y}|\vec{x})$  when $\vec{x}=\emptyset$ and {::nomarkdown}$\vec{y}=(x^n_1, x^n_2, \cdots, x^n_{l_n})${:/nomarkdown}.
+During pretraining, we drive the model to have as much world knowledge as possible via scaling $N \to \infty$, and we do not drive the model to solve specific language tasks $P(\vec{y}\mid\vec{x})$. Therefore, we only care about the whole sequence {::nomarkdown}$(x^n_1, x^n_2, \cdots, x^n_{l_n})${:/nomarkdown}. Or equivalently we only consider $P(\vec{y}\mid\vec{x})$  when $\vec{x}=\emptyset$ and {::nomarkdown}$\vec{y}=(x^n_1, x^n_2, \cdots, x^n_{l_n})${:/nomarkdown}.
 
 Given this pretraining dataset $(\vec{x}^1, \vec{x}^2, \cdots, \vec{x}^N)$ (some of them may be identical and thus I do not write it as a set but a vector),
 we can define another data-based empirical probability measure {::nomarkdown}$P_{\text{data}}${:/nomarkdown} over the sample space {::nomarkdown}$\Omega_{\text{data}}${:/nomarkdown} as follows,
@@ -849,6 +853,7 @@ $$
 P_{\text{data}} (\vec{\omega}) = \frac{ \sum_{i=1}^N \mathbb{1}_{ \{ \vec{x}^i = \vec{\omega} \}  } } {N}, \qquad \forall \vec{\omega} \in \Omega_{\text{data}},
 \end{aligned}
 $$
+
 where {::nomarkdown}$\mathbb{1}_{ \{ \cdot \} }${:/nomarkdown} is the indicator function. Namely, we define the probability of a sequence as its **empirical counting frequency** in the pretrain dataset.
 
 We can only train the network with parameter $\theta$ based on the pretraining dataset. We cannot access the ground-truth {::nomarkdown}$P_{\text{truth}}${:/nomarkdown}. Therefore,
@@ -926,7 +931,7 @@ Thus, the above equation is something like the squeeze theorem in Calculus. We a
 
 Now we aim at {::nomarkdown}$P_{\theta}${:/nomarkdown} approximates {::nomarkdown}$P_{\text{data}}${:/nomarkdown}. We thus need a distance metric between such two **sequence-level** measures.  Kullback–Leibler (KL) divergence is the standard information-theoretic choice to evaluate  the distance between two probability distributions.
 KL divergence is well defined for two distributions over the same sample space. Since {::nomarkdown}$\Omega_{\theta}${:/nomarkdown} could be larger than {::nomarkdown}$\Omega_{\text{data}}${:/nomarkdown},
-we need to manupulate it. The nature solution is to extent {::nomarkdown}$\Omega_{\text{data}}${:/nomarkdown} to {::nomarkdown}$\Omega_{\theta}${:/nomarkdown} by defining
+we need to manipulate it. The natural solution is to extend {::nomarkdown}$\Omega_{\text{data}}${:/nomarkdown} to {::nomarkdown}$\Omega_{\theta}${:/nomarkdown} by defining
 
 $$
 P_{\text{data}} (\vec{\omega}) = 0,  \qquad \forall \vec{\omega} \in \Omega_{\theta} \setminus  \Omega_{\text{data}}.
@@ -960,7 +965,7 @@ We use the **forward** direction {::nomarkdown}$\mathrm{KL}(P_{\text{data}}\|P_\
 Reverse KL {::nomarkdown}$\mathrm{KL}(P_\theta\|P_{\text{data}})${:/nomarkdown} instead encourages **mode-seeking**: {::nomarkdown}$P_\theta${:/nomarkdown} may collapse onto a few high-probability modes and assign near-zero mass elsewhere, which is not pretraining goal. Instead, reverse KL is used during RL phase and I will explain it later. This mode-covering goal is the main reason to use forward KL during pretraining.
 
 2. **We sample from data, not from the model.** Pretraining draws sequences from the pretraining corpus {::nomarkdown}$\Omega_{\text{data}}${:/nomarkdown}, not from {::nomarkdown}$\Omega_{\theta}${:/nomarkdown}.
-Forward KL is an expectation under {::nomarkdown}$P_{\text{data}}${:/nomarkdown} (or, in the ideal limit, {::nomarkdown}$P_{\text{truth}}${:/nomarkdown}). Reverse KV is an expectatoin under {::nomarkdown}$P_{\theta}${:/nomarkdown}, which
+Forward KL is an expectation under {::nomarkdown}$P_{\text{data}}${:/nomarkdown} (or, in the ideal limit, {::nomarkdown}$P_{\text{truth}}${:/nomarkdown}). Reverse KL is an expectation under {::nomarkdown}$P_{\theta}${:/nomarkdown}, which
 is $+\infty$ when {::nomarkdown}$\Omega_{\theta}${:/nomarkdown} is strictly larger than {::nomarkdown}$\Omega_{\text{data}}${:/nomarkdown} (there exists a {::nomarkdown}$\vec{\omega} \in \Omega_{\theta} \setminus  \Omega_{\text{data}}${:/nomarkdown}).
 This condition is easy to be satisfied and it is hard to prevent pretraining from satisfying this condition. Thus, reverse KL is not a good choice.
 
@@ -996,6 +1001,7 @@ $$
 &= \mathbb{E}_{\vec{X}\sim P_{\text{data}}}\!\left[\sum_{t=1}^{L_{\max}} \mathbb{1}_{\{t \le L\}} \log \frac{P_{\text{data}}(X_t \mid \vec{X}_{\lt t})}{P_\theta(X_t \mid \vec{X}_{\lt t})}\right],
 \end{aligned}
 $$
+
 where $L$ is the (random) length of $\vec{X}$ and the sum runs over the tokens of that sequence and we take convention that
 {::nomarkdown}$\log \frac{P_{\text{data}}(X_t \mid \vec{X}_{\lt t})}{P_\theta(X_t \mid \vec{X}_{\lt t})}=0${:/nomarkdown} when $t \gt L$. Exchanging the sum with expectation gives
 
@@ -1008,6 +1014,7 @@ $$
 $$
 
 The inner equality holds because
+
 $$
 \begin{aligned}
 &\mathbb{E}_{\vec{X}\sim P_{\text{data}}}\!\left[\mathbb{1}_{\{t \le L\}}\, \log \frac{P_{\text{data}}(X_t \mid \vec{X}_{\lt t})}{P_\theta(X_t \mid \vec{X}_{\lt t})}\right] \\
@@ -1025,6 +1032,7 @@ $$
 
 
 By the law of total expectations conditioning on {::nomarkdown}$\vec{X}_{\lt t}=\vec{\omega}_{\lt t}${:/nomarkdown}, we then have
+
 $$
 \begin{aligned}
 \mathrm{KL}(P_{\text{data}}\|P_\theta)
@@ -1158,7 +1166,7 @@ In particular, there three terms have the following meanings.
 | Term                        | Name           | Meaning                                                                                  |
 | --------------------------- | -------------  | -----------------------------------------------------------------------------------------|
 | $H(p)$                      | (True) Entropy | Average bits/nats needed if we use the *optimal* code for $p$ to represent $p$           |
-| $\mathrm{KL}(p \,\|\, q)$   | KL Divergence  | Extra bits/nats (*penalty*) needed if we use the *optimal* code for $q$ to represent $p$ |
+| $\mathrm{KL}(p \,\Vert\, q)$ | KL Divergence  | Extra bits/nats (*penalty*) needed if we use the *optimal* code for $q$ to represent $p$ |
 | $H(p,q)$                    | Cross-Entropy  | Average bits/nats needed if we use the *optimal* code for $q$ to represent $p$           |
 
 
@@ -1187,24 +1195,58 @@ For the global sequence-level KL divergence, we have
 $$
 \begin{aligned}
 \mathrm{KL}\!\left(P_{\text{data}} \,\|\, P_\theta\right)
-&= \sum_{t = 1}^{L_{\max}} \left[ \frac{ \sum_{n=1}^N  \left[ \mathbb{1}_{ \{ t \le l_n \} } \cdot \mathrm{KL}\!\left(P_{\text{data}}(\cdot \mid \vec{x}^n_{\lt t}) \,\big\|\, P_\theta(\cdot \mid \vec{x}^n_{\lt t})\right) \right]  }{ \sum_{n=1}^N \mathbb{1}_{ \{ t \le l_n \} }}  \right] \\
-&= - \sum_{t = 1}^{L_{\max}} \left[ \frac{ \sum_{n=1}^N  \left[ \mathbb{1}_{ \{ t \le l_n \} } \cdot H(P_{\text{data}}(\cdot\mid \vec{x}^n_{\lt t})) \right]  }{ \sum_{n=1}^N \mathbb{1}_{ \{ t \le l_n \} }}  \right]
-+ \sum_{t = 1}^{L_{\max}} \left[ \frac{ \sum_{n=1}^N  \left[ \mathbb{1}_{ \{ t \le l_n \} } \cdot H(P_{\text{data}}(\cdot\mid \vec{x}^n_{\lt t}),\,P_\theta(\cdot\mid \vec{x}^n_{\lt t})) \right]  }{ \sum_{n=1}^N \mathbb{1}_{ \{ t \le l_n \} }}  \right]
+&= \sum_{t = 1}^{L_{\max}}
+\frac{
+  \sum_{n=1}^N \mathbb{1}_{ \{ t \le l_n \} }
+  \mathrm{KL}\!\left(P_{\text{data}}(\cdot \mid \vec{x}^n_{\lt t}) \,\big\|\, P_\theta(\cdot \mid \vec{x}^n_{\lt t})\right)
+}{
+  \sum_{n=1}^N \mathbb{1}_{ \{ t \le l_n \} }
+} \\
+&= - \sum_{t = 1}^{L_{\max}}
+\frac{
+  \sum_{n=1}^N \mathbb{1}_{ \{ t \le l_n \} }
+  H(P_{\text{data}}(\cdot\mid \vec{x}^n_{\lt t}))
+}{
+  \sum_{n=1}^N \mathbb{1}_{ \{ t \le l_n \} }
+} \\
+&\quad + \sum_{t = 1}^{L_{\max}}
+\frac{
+  \sum_{n=1}^N \mathbb{1}_{ \{ t \le l_n \} }
+  H(P_{\text{data}}(\cdot\mid \vec{x}^n_{\lt t}),\,P_\theta(\cdot\mid \vec{x}^n_{\lt t}))
+}{
+  \sum_{n=1}^N \mathbb{1}_{ \{ t \le l_n \} }
+}.
 \end{aligned}
 $$
 
 We can go through the same derivation in Sec. 3.3 to get the sequence-level entropy/cross-entropy to token-Level entropies/cross-entropies. Namely, the sequence-level (true) entropy of {::nomarkdown}$P_{\text{data}}${:/nomarkdown} is
 
 $$
+\begin{aligned}
 H(P_{\text{data}})
-= \sum_{t = 1}^{L_{\max}} \left[ \frac{ \sum_{n=1}^N  \left[ \mathbb{1}_{ \{ t \le l_n \} } \cdot H(P_{\text{data}}(\cdot\mid \vec{x}^n_{\lt t})) \right]  }{ \sum_{n=1}^N \mathbb{1}_{ \{ t \le l_n \} }}  \right],
+&= \sum_{t = 1}^{L_{\max}}
+\frac{
+  \sum_{n=1}^N \mathbb{1}_{ \{ t \le l_n \} }
+  H(P_{\text{data}}(\cdot\mid \vec{x}^n_{\lt t}))
+}{
+  \sum_{n=1}^N \mathbb{1}_{ \{ t \le l_n \} }
+}.
+\end{aligned}
 $$
 
 and the sequence-level cross entropy between {::nomarkdown}$P_{\text{data}}${:/nomarkdown} and {::nomarkdown}$P_{\theta}${:/nomarkdown} is
 
 $$
+\begin{aligned}
 H(P_{\text{data}}, P_{\theta})
-= \sum_{t = 1}^{L_{\max}} \left[ \frac{ \sum_{n=1}^N  \left[ \mathbb{1}_{ \{ t \le l_n \} } \cdot H(P_{\text{data}}(\cdot\mid \vec{x}^n_{\lt t}),\,P_\theta(\cdot\mid \vec{x}^n_{\lt t})) \right]  }{ \sum_{n=1}^N \mathbb{1}_{ \{ t \le l_n \} }}  \right]
+&= \sum_{t = 1}^{L_{\max}}
+\frac{
+  \sum_{n=1}^N \mathbb{1}_{ \{ t \le l_n \} }
+  H(P_{\text{data}}(\cdot\mid \vec{x}^n_{\lt t}),\,P_\theta(\cdot\mid \vec{x}^n_{\lt t}))
+}{
+  \sum_{n=1}^N \mathbb{1}_{ \{ t \le l_n \} }
+}.
+\end{aligned}
 $$
 
 Of course, we have
@@ -1218,10 +1260,10 @@ and I would like to emphasize the physical meaning of these three terms again
 | Term                        | Name           | Meaning                                                                                  |
 | --------------------------- | -------------  | -----------------------------------------------------------------------------------------|
 | {::nomarkdown}$H(P_{\text{data}})${:/nomarkdown}                                          | Empirical Corpus Entropy  | Average bits/nats needed if we use the *optimal* code for pretrain sequence-level distribution {::nomarkdown}$P_{\text{data}}${:/nomarkdown} to represent {::nomarkdown}$P_{\text{data}}${:/nomarkdown}           |
-| {::nomarkdown}$\mathrm{KL}\!\left(P_{\text{data}} \,\|\, P_\theta\right)${:/nomarkdown}   | Forward KL Divergence     | Extra bits/nats (*penalty*) needed if we use the *optimal* code for  predicted/estimated sequence-level distribution {::nomarkdown}$P_{\theta}${:/nomarkdown} to represent {::nomarkdown}$P_{\text{data}}${:/nomarkdown}  |
+| {::nomarkdown}$\mathrm{KL}\!\left(P_{\text{data}} \,\Vert\, P_\theta\right)${:/nomarkdown} | Forward KL Divergence     | Extra bits/nats (*penalty*) needed if we use the *optimal* code for  predicted/estimated sequence-level distribution {::nomarkdown}$P_{\theta}${:/nomarkdown} to represent {::nomarkdown}$P_{\text{data}}${:/nomarkdown}  |
 | {::nomarkdown}$H(P_{\text{data}}, P_{\theta})${:/nomarkdown}                              | Cross-Entropy             | Average bits/nats needed if we use the *optimal* code for predicted/estimated sequence-level distribution {::nomarkdown}$P_{\theta}${:/nomarkdown} to represent {::nomarkdown}$P_{\text{data}}${:/nomarkdown}         |
 
-Therefore, minimizing seqence-level KL divergence is equivalent to minimizing sequence-level cross-entropy, yielding
+Therefore, minimizing sequence-level KL divergence is equivalent to minimizing sequence-level cross-entropy, yielding
 same optimal parameter $\theta^*$ and a constant gap on the optimal values, i.e.,
 
 $$
@@ -1238,7 +1280,13 @@ $$
 \boxed{
 \begin{aligned}
 \min_{\theta}\; H(P_{\text{data}}, P_{\theta})
-&= \min_{\theta}\; \sum_{t = 1}^{L_{\max}} \left[ \frac{ \sum_{n=1}^N  \left[ \mathbb{1}_{ \{ t \le l_n \} } \cdot H(P_{\text{data}}(\cdot\mid \vec{x}^n_{\lt t}),\,P_\theta(\cdot\mid \vec{x}^n_{\lt t})) \right]  }{ \sum_{n=1}^N \mathbb{1}_{ \{ t \le l_n \} }}  \right] .
+&= \min_{\theta}\; \sum_{t = 1}^{L_{\max}}
+\frac{
+  \sum_{n=1}^N \mathbb{1}_{ \{ t \le l_n \} }
+  H(P_{\text{data}}(\cdot\mid \vec{x}^n_{\lt t}),\,P_\theta(\cdot\mid \vec{x}^n_{\lt t}))
+}{
+  \sum_{n=1}^N \mathbb{1}_{ \{ t \le l_n \} }
+}.
 \end{aligned}
 }
 $$
@@ -1289,13 +1337,25 @@ $$
 \boxed{
 \begin{aligned}
 \min_{\theta}\; H(P_{\text{data}}, P_{\theta})
-&= \min_{\theta}\; \sum_{t = 1}^{L_{\max}} \left[ \frac{ \sum_{n=1}^N  \left[ \mathbb{1}_{ \{ t \le l_n \} } \cdot H(P_{\text{data}}(\cdot\mid \vec{x}^n_{\lt t}),\,P_\theta(\cdot\mid \vec{x}^n_{\lt t})) \right]  }{ \sum_{n=1}^N \mathbb{1}_{ \{ t \le l_n \} }}  \right] \\
-&= \min_{\theta}\; \sum_{t = 1}^{L_{\max}} \left[ \frac{  \sum_{n=1}^N \left[ \mathbb{1}_{ \{ t \le l_n \} } \cdot \left( - \log P_\theta( x^n_t \mid \vec{x}^n_{\lt t}) \right) \right]}{\sum_{n=1}^N \mathbb{1}_{ \{ t \le l_n \} }} \right] .
+&= \min_{\theta}\; \sum_{t = 1}^{L_{\max}}
+\frac{
+  \sum_{n=1}^N \mathbb{1}_{ \{ t \le l_n \} }
+  H(P_{\text{data}}(\cdot\mid \vec{x}^n_{\lt t}),\,P_\theta(\cdot\mid \vec{x}^n_{\lt t}))
+}{
+  \sum_{n=1}^N \mathbb{1}_{ \{ t \le l_n \} }
+} \\
+&= \min_{\theta}\; \sum_{t = 1}^{L_{\max}}
+\frac{
+  \sum_{n=1}^N \mathbb{1}_{ \{ t \le l_n \} }
+  \left( - \log P_\theta( x^n_t \mid \vec{x}^n_{\lt t}) \right)
+}{
+  \sum_{n=1}^N \mathbb{1}_{ \{ t \le l_n \} }
+}.
 \end{aligned}
 }
 $$
 
-This illustrates that the sequence-level cross-entroy loss is equal to the summation of **average** token-level cross-entropy loss over all token positions, and
+This illustrates that the sequence-level cross-entropy loss is equal to the summation of **average** token-level cross-entropy loss over all token positions, and
 is further equal to  the summation of **average** token-level NLL loss over all token positions.
 
 
@@ -1306,7 +1366,7 @@ $$
 \mathrm{NLL}(n,t) \;=\; - \log P_\theta( x^n_t \mid \vec{x}^n_{\lt t}), \qquad 1 \le t \le l_n,
 $$
 
-and we depcit them in the following table
+and we depict them in the following table
 
 ```
            |   t = 1    |   t = 2    |  t = 3     |   t = 4    |
@@ -1333,7 +1393,7 @@ $$
 ### 3.5 Assumption for Equal-length Pretraining Sequences
 
 We will now show some assumptions to approximate the pretrain optimization object mainly for efficient implementation in practice.
-In practicle, we generally have
+In practice, we generally have
 
 $$
 N \gg L_{\max},
@@ -1345,14 +1405,25 @@ and pretrained more than 32T tokens. In addition, the context window is generall
 of length up to 4K for pretraining. Then we have
 
 $$
-N \ge \frac{10T}{4K} = \frac{10 \times 10^{12}}{4096} = 2.44 \times 10^9 \approx 2.5B \gg L_{\max} = 4096 = 4K.
+\begin{aligned}
+N
+&\ge \frac{10T}{4K}
+= \frac{10 \times 10^{12}}{4096}
+= 2.44 \times 10^9 \\
+&\approx 2.5B \gg L_{\max} = 4096 = 4K.
+\end{aligned}
 $$
 
 This confirms that $N$ is much larger than {::nomarkdown}$L_{\max}${:/nomarkdown}. For each position $t$, if we want to get a forward pass or a backward pass
 for the average token-level NLL loss, i.e.,
 
 $$
-\frac{  \sum_{n=1}^N \left[ \mathbb{1}_{ \{ t \le l_n \} } \cdot \left( - \log P_\theta( x^n_t \mid \vec{x}^n_{\lt t}) \right) \right]}{\sum_{n=1}^N \mathbb{1}_{ \{ t \le l_n \} }},
+\frac{
+  \sum_{n=1}^N \mathbb{1}_{ \{ t \le l_n \} }
+  \left( - \log P_\theta( x^n_t \mid \vec{x}^n_{\lt t}) \right)
+}{
+  \sum_{n=1}^N \mathbb{1}_{ \{ t \le l_n \} }
+},
 $$
 
 we need to load all $N$ data samples, which is expensive. It is even worse that we need to
@@ -1370,9 +1441,21 @@ $$
 \boxed{
 \begin{aligned}
 \min_{\theta}\; H(P_{\text{data}}, P_{\theta})
-&= \min_{\theta}\; \sum_{t = 1}^{L_{\max}} \left[ \frac{  \sum_{n=1}^N \left[ \mathbb{1}_{ \{ t \le l_n \} } \cdot \left( - \log P_\theta( x^n_t \mid \vec{x}^n_{\lt t}) \right) \right]}{\sum_{n=1}^N \mathbb{1}_{ \{ t \le l_n \} }} \right] \\
-&\approx  \min_{\theta}\; \sum_{t = 1}^{L_{\max}} \left[ \frac{  \sum_{n=1}^N \left[ \mathbb{1}_{ \{ t \le l_n \} } \cdot \left( - \log P_\theta( x^n_t \mid \vec{x}^n_{\lt t}) \right) \right]}{N} \right] \\
-&=   \min_{\theta}\; \frac{1}{N}  \sum_{n=1}^N   \sum_{t = 1}^{l_n} \left( - \log P_\theta( x^n_t \mid \vec{x}^n_{\lt t}) \right) .
+&= \min_{\theta}\; \sum_{t = 1}^{L_{\max}}
+\frac{
+  \sum_{n=1}^N \mathbb{1}_{ \{ t \le l_n \} }
+  \left( - \log P_\theta( x^n_t \mid \vec{x}^n_{\lt t}) \right)
+}{
+  \sum_{n=1}^N \mathbb{1}_{ \{ t \le l_n \} }
+} \\
+&\approx  \min_{\theta}\; \sum_{t = 1}^{L_{\max}}
+\frac{
+  \sum_{n=1}^N \mathbb{1}_{ \{ t \le l_n \} }
+  \left( - \log P_\theta( x^n_t \mid \vec{x}^n_{\lt t}) \right)
+}{N} \\
+&=   \min_{\theta}\; \frac{1}{N}  \sum_{n=1}^N
+\sum_{t = 1}^{l_n}
+\left( - \log P_\theta( x^n_t \mid \vec{x}^n_{\lt t}) \right).
 \end{aligned}
 }
 $$
@@ -1455,7 +1538,7 @@ In summary, with this equal-length preprocessing assumption/approximation, we ha
 
 
 
-We again consider the previous toy example with $N=5$, {::nomarkdown}$L_{\max}=4${:/nomarkdown}. With equal-length assumption, we can depcit them in the following table
+We again consider the previous toy example with $N=5$, {::nomarkdown}$L_{\max}=4${:/nomarkdown}. With equal-length assumption, we can depict them in the following table
 
 ```
            |   t = 1    |   t = 2    |  t = 3                |   t = 4             |
@@ -1476,7 +1559,8 @@ H(P_{\text{data}}, P_{\theta}) \\
 + \underbrace{\frac{\mathrm{NLL}(1,2)+\mathrm{NLL}(2,2)+\mathrm{NLL}(3,2)+\mathrm{NLL}(4,2)+\mathrm{NLL}(5,2)}{5}}_{t=2} \\
 + \underbrace{\frac{\mathrm{NLL}(1,3)+\mathrm{NLL}(2,3)+\mathrm{NLL}(3,3)+\mathrm{NLL}(4,3)+\mathrm{NLL}(5,3)}{5}}_{t=3} \\
 + \underbrace{\frac{\mathrm{NLL}(1,4)+\mathrm{NLL}(2,4)+\mathrm{NLL}(3,4)+\mathrm{NLL}(4,4)+\mathrm{NLL}(5,4)}{5}}_{t=4} \\
-= \frac{1}{5} \sum_{n=1}^5 \left[ \mathrm{NLL}(n,1)+\mathrm{NLL}(n,2)+\mathrm{NLL}(n,3)+\mathrm{NLL}(n,4)+\mathrm{NLL}(n,5) \right].
+= \frac{1}{5} \sum_{n=1}^5
+\left[ \mathrm{NLL}(n,1)+\mathrm{NLL}(n,2)+\mathrm{NLL}(n,3)+\mathrm{NLL}(n,4) \right].
 \end{aligned}
 $$
 
@@ -1528,11 +1612,11 @@ $$
 \theta_{t+1} = \theta_{t} - \eta_{t} \nabla_\theta \mathcal{L}(\theta_t) = \theta_{t} - \eta_{t} \cdot  \frac{1}{N}  \sum_{n=1}^N \nabla_\theta \mathcal{L}^n(\theta_t),
 $$
 
-where the learning rate {::nomarkdown}$\eta_{t} ${:/nomarkdown} should be small enough to gurantee convergence (if $\mathcal{L}(\theta)$ is convex over $\theta$).
+where the learning rate {::nomarkdown}$\eta_{t} ${:/nomarkdown} should be small enough to guarantee convergence (if $\mathcal{L}(\theta)$ is convex over $\theta$).
 
 However, as we mentioned before, $N$ is very large such that computing global gradient over all data samples is infeasible.
 If we really do it, we will need to load all data samples into GPU for one single parameter update iteration/step. In practice,
-we thus use stochastic-gradient-descent (SGD) algortihm to solve the optimiation problem. Concretely,
+we thus use stochastic-gradient-descent (SGD) algorithm to solve the optimization problem. Concretely,
 We **randomly** divide all $N$ data samples into $M=\frac{N}{B}$ mini-batches of size $B$. Thus, each mini-batch has $B$ data samples.
 We can then index the pretraining dataset by tuple (mini-batch-index, sample-index-inside-mini-batch) as
 - Mini-Batch 1: data sample $(1,1)$, data sample $(1,2)$, ..., data sample $(1, B)$
@@ -1614,7 +1698,7 @@ $$
 >
 > In practice (and also in this nanochat-ascend project), we do not use SGD but AdamW/Muon algorithms. In particular, we use AdamW to optimize the embeddings and scalars, and use Muon to optimize the matrix parameters. See the code in https://github.com/leideng/nanochat-ascend/blob/main/nanochat/optim.py. However, their basic ideas are still SGD but has better performance. I will discuss them some days later when I have time. For the time being, it is enough to understand the mini-batch SGD algorithm.
 
-### 3.7. Pretraing Runing and Logs
+### 3.7. Pretraining Running and Logs
 
 To run pretraining locally, simply run
 
