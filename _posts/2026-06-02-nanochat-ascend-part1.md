@@ -1734,7 +1734,7 @@ After that, we can evaluate the pretrain model by running
 bash runs/run_base_eval.sh
 ```
 
-The full d20 pretrain log is in [d20.pretrain.log](./d20.pretrain.log); a shortened version appears below.
+The full d20 pretrain log is in [d20.pretrain.log](https://github.com/leideng/leideng.github.io/blob/main/_posts/d20.pretrain.log); a shortened version appears below.
 
 <details>
 <summary>d20 Pretraining Log (head/middle/tail samples only)</summary>
