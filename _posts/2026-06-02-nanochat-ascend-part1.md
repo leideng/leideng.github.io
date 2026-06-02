@@ -123,8 +123,8 @@ and the encoded sequence {::nomarkdown}$T_{enc}(\vec{x}) = (t_1,\cdots,t_{L(\vec
 $$
 \begin{aligned}
 &\min_{T_{enc},T_{dec},\mathcal{V}} \mathbb{E}_{\vec{x} \sim p_{\mathrm{data}}}\big[L(\vec{x})\big] \\
-&\quad \text{subject to} \quad |\mathcal{V}| = V, \quad T_{dec}(T_{enc}(\vec{x})) = \vec{x} \\
-&\quad \text{for all } \vec{x} \in \Sigma^{\ast}.
+&\quad \text{subject to} \quad |\mathcal{V}| = V, \quad
+T_{dec}(T_{enc}(\vec{x})) = \vec{x}, \quad \forall \vec{x} \in \Sigma^{\ast}.
 \end{aligned}
 $$
 
@@ -268,6 +268,7 @@ bash runs/run_tok_train.sh
 ```
 
 `run_tok_train.sh` calls Karpathy’s `tok_train.py` with the following options
+
 | Flag | Default in `tok_train.py` | Notes |
 |------|---------------------------|--------|
 | `--max-chars` | `20_000_000_000` | Cap on characters seen during BPE training |
@@ -514,17 +515,13 @@ Note that we do not add `<eos>` special token since `<bos>` also marks the end o
 Thus, a valid token sequence becomes
 
 $$
-\begin{aligned}
-\vec{X}
-&= (X_1=\text{\lt bos\gt}, X_2, \dots, X_{L-1}, X_L=\text{\lt bos\gt}), \\
-&\qquad X_2,\dots,X_{L-1} \neq \text{\lt bos\gt}, \quad L \ge 2.
-\end{aligned}
+\vec{X} = (X_1=\text{<bos>}, X_2, \dots, X_{L-1}, X_L=\text{<bos>}), \quad X_2,\dots,X_{L-1} \neq \text{<bos>}, \quad L \ge 2.
 $$
 
 In addition, due to the limited computation capability, we cannot handle arbitrary long sequences. Thus, we will impose a context window {::nomarkdown}$L_{\max}${:/nomarkdown} restriction and we require that {::nomarkdown}$L \le L_{\max}${:/nomarkdown}.
 In our nanochat-ascend project, we set {::nomarkdown}$L_{\max}=2048${:/nomarkdown}. The latest model such as DeepSeek V4 has 1M context windows size, i.e., $L=1048576$.
 
-Then the stop time $L$ is defined as either {::nomarkdown}$L = L_{\max}${:/nomarkdown} or {::nomarkdown}$X_L = \text{\lt bos\gt}${:/nomarkdown}, which can be determined by the information up to $t$ at each step $t$.
+Then the stop time $L$ is defined as either {::nomarkdown}$L = L_{\max}${:/nomarkdown} or {::nomarkdown}$X_L = \text{&lt;bos&gt;}${:/nomarkdown}, which can be determined by the information up to $t$ at each step $t$.
 
 
 The set of all valid token sequences is denoted by {::nomarkdown}$\Omega_{\text{truth}}${:/nomarkdown}, which serves as **the sample space**.  We can count the total number of sequences by length:
@@ -536,8 +533,8 @@ The set of all valid token sequences is denoted by {::nomarkdown}$\Omega_{\text{
 | $4$ | $2$ | $V^2$ |
 | $\vdots$ | $\vdots$ | $\vdots$ |
 | {::nomarkdown}$L_{\max}-1${:/nomarkdown} | {::nomarkdown}$L_{\max}-3${:/nomarkdown} | {::nomarkdown}$V^{L_{\max}-3}${:/nomarkdown} |
-| {::nomarkdown}$L_{\max}${:/nomarkdown} where {::nomarkdown}$X_{L_{\max}} = \text{\lt bos\gt}${:/nomarkdown} | {::nomarkdown}$L_{\max}-2${:/nomarkdown} | {::nomarkdown}$V^{L_{\max}-2}${:/nomarkdown} |
-| {::nomarkdown}$L_{\max}${:/nomarkdown} where {::nomarkdown}$X_{L_{\max}} \neq \text{\lt bos\gt}${:/nomarkdown}| {::nomarkdown}$L_{\max}-1${:/nomarkdown} | {::nomarkdown}$V^{L_{\max}-1}${:/nomarkdown} |
+| {::nomarkdown}$L_{\max}${:/nomarkdown} where {::nomarkdown}$X_{L_{\max}} = \text{&lt;bos&gt;}${:/nomarkdown} | {::nomarkdown}$L_{\max}-2${:/nomarkdown} | {::nomarkdown}$V^{L_{\max}-2}${:/nomarkdown} |
+| {::nomarkdown}$L_{\max}${:/nomarkdown} where {::nomarkdown}$X_{L_{\max}} \neq \text{&lt;bos&gt;}${:/nomarkdown}| {::nomarkdown}$L_{\max}-1${:/nomarkdown} | {::nomarkdown}$V^{L_{\max}-1}${:/nomarkdown} |
 
 Thus the total number of all valid sequences over all possible lengths is
 
@@ -553,11 +550,7 @@ First, the probability of {::nomarkdown}$\vec{X} = \vec{\omega} = (\omega_1,\ome
 {::nomarkdown}$L=l, X_1=\omega_1, X_2=\omega_2, \cdots, X_l = \omega_l${:/nomarkdown}, i.e.,
 
 $$
-\begin{aligned}
-P_{\text{truth}}(\vec{\omega})
-&= P_{\text{truth}}(\vec{X} = \vec{\omega}) \\
-&= P_{\text{truth}} (L=l, X_1=\omega_1, X_2=\omega_2, \cdots, X_l=\omega_l).
-\end{aligned}
+P_{\text{truth}}(\vec{\omega}) = P_{\text{truth}}(\vec{X} = \vec{\omega}) = P_{\text{truth}} (L=l, X_1=\omega_1, X_2=\omega_2, \cdots, X_l=\omega_l).
 $$
 
 Once we have the joint distribution {::nomarkdown}$P_{\text{truth}}(\vec{\omega})${:/nomarkdown}, i.e., we have the probability for each element in the sample space,
@@ -570,7 +563,7 @@ P_{\text{truth}}(X_1=a)
 P_{\text{truth}}(\vec{\omega}) \\
 &=
 \begin{cases}
-    1, & \text{if } a=\text{\lt bos\gt},  \\
+    1, & \text{if } a=\text{<bos>},  \\
     0, & \text{otherwise.}
 \end{cases}
 \end{aligned}
@@ -596,25 +589,42 @@ $$
 For notation simplicity, we sometimes omit the random variable {::nomarkdown}$X_i${:/nomarkdown} but simply use {::nomarkdown}$\omega_i/x_i/y_i${:/nomarkdown} when the context is clear to show that {::nomarkdown}$\omega_i/x_i/y_i${:/nomarkdown} is the $i$-th token in a sequence, namely
 
 $$
-\begin{aligned}
-P_{\text{truth}}(\omega_i) := P_{\text{truth}} (X_i=\omega_i). \\
-P_{\text{truth}}(x_i) := P_{\text{truth}} (X_i=x_i). \\
+P_{\text{truth}}(\omega_i) := P_{\text{truth}} (X_i=\omega_i).
+$$
+
+$$
+P_{\text{truth}}(x_i) := P_{\text{truth}} (X_i=x_i).
+$$
+
+$$
 P_{\text{truth}}(y_i) := P_{\text{truth}} (X_i=y_i).
-\end{aligned}
 $$
 
 Similarly, we also sometimes omit several random variables to denote the probability for several tokens.
 For example, if we define {::nomarkdown}$\vec{x}=(x_1,x_2,x_3)${:/nomarkdown} and {::nomarkdown}$\vec{y}=(y_4,y_5,y_6)${:/nomarkdown}, we have
 
 $$
-\begin{aligned}
-P_{\text{truth}}(\vec{x}) := P_{\text{truth}} (X_1=x_1, X_2=x_2, X_3=x_3). \\
-P_{\text{truth}}(\vec{y}) := P_{\text{truth}} (X_4=y_4, X_5=y_5, X_6=y_6). \\
-P_{\text{truth}}(\vec{y} \mid \vec{x}) := P_{\text{truth}} (X_4=y_4, X_5=y_5, X_6=y_6 \mid X_1=x_1, X_2=x_2, X_3=x_3). \\
-P_{\text{truth}}(\vec{x},y_4) := P_{\text{truth}} (X_1=x_1,X_2=x_2,X_3=x_3,X_4=y_4). \\
-P_{\text{truth}}(y_5, \vec{x}) := P_{\text{truth}}(\vec{x}, y_5) = P_{\text{truth}} (X_1=x_1,X_2=x_2,X_3=x_3,X_5=y_5). \\
+P_{\text{truth}}(\vec{x}) := P_{\text{truth}} (X_1=x_1, X_2=x_2, X_3=x_3).
+$$
+
+$$
+P_{\text{truth}}(\vec{y}) := P_{\text{truth}} (X_4=y_4, X_5=y_5, X_6=y_6).
+$$
+
+$$
+P_{\text{truth}}(\vec{y} \mid \vec{x}) := P_{\text{truth}} (X_4=y_4, X_5=y_5, X_6=y_6 \mid X_1=x_1, X_2=x_2, X_3=x_3).
+$$
+
+$$
+P_{\text{truth}}(\vec{x},y_4) := P_{\text{truth}} (X_1=x_1,X_2=x_2,X_3=x_3,X_4=y_4).
+$$
+
+$$
+P_{\text{truth}}(y_5, \vec{x}) := P_{\text{truth}}(\vec{x}, y_5) = P_{\text{truth}} (X_1=x_1,X_2=x_2,X_3=x_3,X_5=y_5).
+$$
+
+$$
 P_{\text{truth}}(\vec{x},\vec{y}) := P_{\text{truth}} (X_1=x_1,X_2=x_2,X_3=x_3,X_4=y_4,X_5=y_5,X_6=y_6).
-\end{aligned}
 $$
 
 
@@ -651,7 +661,7 @@ P_{\text{truth}} ( \vec{y} \mid \vec{x} )
 \end{aligned}
 $$
 
-with the convention {::nomarkdown}$P_{\text{truth}}(X_1 = \text{\lt bos\gt} \mid \emptyset) = 1${:/nomarkdown}.
+with the convention {::nomarkdown}$P_{\text{truth}}(X_1 = \text{&lt;bos&gt;} \mid \emptyset) = 1${:/nomarkdown}.
 Now we have factorized the conditional probability {::nomarkdown}$P_{\text{truth}} ( \vec{y} \mid \vec{x} )${:/nomarkdown} into $l-i+1$ next-token
 conditional probabilities {::nomarkdown}$P_{\text{truth}} (y_t \mid x_1,x_2,\cdots,x_{i-1}, y_i, \cdots, y_{t-1})${:/nomarkdown}.
 
@@ -775,7 +785,7 @@ We only need $V+1$ numbers to represent {::nomarkdown}$P_{\text{truth},t} (\omeg
 $$
 \begin{aligned}
 &P_{\text{truth},t} (\omega_t = 1 \mid \vec{w}_{\lt t}), \quad \cdots, \quad P_{\text{truth},t} (\omega_t = V \mid \vec{w}_{\lt t}), \\
-&P_{\text{truth},t} (\omega_t = \text{\lt bos\gt}  \mid \vec{w}_{\lt t}).
+&P_{\text{truth},t} (\omega_t = \text{<bos>}  \mid \vec{w}_{\lt t}).
 \end{aligned}
 $$
 
@@ -1058,9 +1068,9 @@ $$
 &\mathbb{E}_{ (\vec{X}_{\lt t}, X_t) \sim P_{\text{data},t}}\!\left[ \left. \log \frac{P_{\text{data}}(X_t \mid \vec{X}_{\lt t})}{P_\theta(X_t \mid \vec{X}_{\lt t})} \right|  \vec{X}_{\lt t} = \vec{\omega}_{\lt t} \right] \\
 &= \sum_{ (\nu_{\lt t}, \nu_t) \in \Omega_{\text{data},t}} P_{\text{data}} \left( (\vec{X}_{\lt t}, X_t)=(\nu_{\lt t}, \nu_t) \mid \vec{X}_{\lt t} = \vec{\omega}_{\lt t} \right)
 \cdot \left[ \log \frac{P_{\text{data}}(\nu_t \mid \vec{\nu}_{\lt t})}{P_\theta(\nu_t \mid \vec{\nu}_{\lt t})} \right] \\
-&= \sum_{ \nu_t \in \mathcal{V} \cup \{ \text{\lt bos\gt} \}} P_{\text{data}} \left( X_t=\nu_t \mid \vec{X}_{\lt t} = \vec{\omega}_{\lt t} \right)
+&= \sum_{ \nu_t \in \mathcal{V} \cup \{ \text{<bos>} \}} P_{\text{data}} \left( X_t=\nu_t \mid \vec{X}_{\lt t} = \vec{\omega}_{\lt t} \right)
 \cdot \left[ \log \frac{P_{\text{data}}(\nu_t \mid \vec{\omega}_{\lt t})}{P_\theta(\nu_t \mid \vec{\omega}_{\lt t})} \right] \\
-&= \sum_{ \nu_t \in \mathcal{V} \cup \{ \text{\lt bos\gt} \} } P_{\text{data}} (\nu_t \mid \vec{\omega}_{\lt t})
+&= \sum_{ \nu_t \in \mathcal{V} \cup \{ \text{<bos>} \} } P_{\text{data}} (\nu_t \mid \vec{\omega}_{\lt t})
 \cdot \left[ \log \frac{P_{\text{data}}(\nu_t \mid \vec{\omega}_{\lt t})}{P_\theta(\nu_t \mid \vec{\omega}_{\lt t})} \right]
 =\mathrm{KL}\!\left(P_{\text{data}}(\cdot \mid \vec{\omega}_{\lt t}) \,\big\|\, P_\theta(\cdot \mid \vec{\omega}_{\lt t})\right).
 \end{aligned}
@@ -1316,8 +1326,8 @@ $$
 \begin{aligned}
 \sum_{n=1}^N  \left[ \mathbb{1}_{ \{ t \le l_n \} } \cdot H(P_{\text{data}}(\cdot\mid \vec{x}^n_{\lt t}),\,P_\theta(\cdot\mid \vec{x}^n_{\lt t})) \right]
 &= \sum_{\vec{\omega}_{\lt t} \in \Omega_{\text{data}, \lt t}} \left[ \mathbb{1}_{ \{ t \le l_n \} } \cdot N_{\text{data}, \vec{\omega}_{\lt t}} \cdot H(P_{\text{data}}(\cdot\mid \vec{\omega}_{\lt t}),\,P_\theta(\cdot\mid \vec{\omega}_{\lt t})) \right] \\
-&= - \sum_{\vec{\omega}_{\lt t} \in \Omega_{\text{data}, \lt t}} \left[ \mathbb{1}_{ \{ t \le l_n \} } \cdot N_{\text{data}, \vec{\omega}_{\lt t}} \cdot \sum_{ \omega_t \in \mathcal{V} \cup \{ \text{\lt bos\gt} \} } P_{\text{data}}( \omega_t \mid  \vec{\omega}_{\lt t}) \cdot \log P_\theta( \omega_t \mid \vec{\omega}_{\lt t}) \right] \\
-&= - \sum_{\vec{\omega}_{\lt t} \in \Omega_{\text{data}, \lt t}} \left[ \mathbb{1}_{ \{ t \le l_n \} } \cdot \sum_{ \omega_t \in \mathcal{V} \cup \{ \text{\lt bos\gt} \} } N_{\text{data}, (\vec{\omega}_{\lt t}, \omega_t)}  \cdot \log P_\theta( \omega_t \mid \vec{\omega}_{\lt t}) \right] \\
+&= - \sum_{\vec{\omega}_{\lt t} \in \Omega_{\text{data}, \lt t}} \left[ \mathbb{1}_{ \{ t \le l_n \} } \cdot N_{\text{data}, \vec{\omega}_{\lt t}} \cdot \sum_{ \omega_t \in \mathcal{V} \cup \{ \text{<bos>} \} } P_{\text{data}}( \omega_t \mid  \vec{\omega}_{\lt t}) \cdot \log P_\theta( \omega_t \mid \vec{\omega}_{\lt t}) \right] \\
+&= - \sum_{\vec{\omega}_{\lt t} \in \Omega_{\text{data}, \lt t}} \left[ \mathbb{1}_{ \{ t \le l_n \} } \cdot \sum_{ \omega_t \in \mathcal{V} \cup \{ \text{<bos>} \} } N_{\text{data}, (\vec{\omega}_{\lt t}, \omega_t)}  \cdot \log P_\theta( \omega_t \mid \vec{\omega}_{\lt t}) \right] \\
 &= \sum_{n=1}^N \left[ \mathbb{1}_{ \{ t \le l_n \} } \cdot \left( - \log P_\theta( x^n_t \mid \vec{x}^n_{\lt t}) \right) \right]
 \end{aligned}
 $$
