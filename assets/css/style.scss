@@ -318,6 +318,105 @@ img {
   max-width: 47rem;
 }
 
+.post-shell .markdown-body :where(p, ul, ol, blockquote) {
+  max-width: none;
+}
+
+.post-header h1 {
+  margin: 0 0 0.6rem;
+  max-width: none;
+  color: var(--heading);
+  font-size: clamp(1.9rem, 3vw, 2.45rem);
+  line-height: 1.2;
+}
+
+.post-date {
+  margin: 0 0 1.6rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.post-layout {
+  display: grid;
+  grid-template-columns: minmax(11rem, 14rem) minmax(0, 1fr);
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.post-toc {
+  position: sticky;
+  top: 5.5rem;
+  align-self: start;
+  max-height: calc(100vh - 6.5rem);
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.post-toc-label {
+  margin: 0 0 0.75rem;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.post-toc-list,
+.post-toc-sublist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.post-toc-list > li {
+  margin-bottom: 0.35rem;
+}
+
+.post-toc-sublist {
+  margin: 0.35rem 0 0.55rem;
+  padding-left: 0.85rem;
+  border-left: 1px solid var(--line);
+}
+
+.post-toc-sublist li {
+  margin-bottom: 0.3rem;
+}
+
+.post-toc-link {
+  display: block;
+  color: var(--muted);
+  font-size: 0.84rem;
+  line-height: 1.35;
+  text-decoration: none;
+}
+
+.post-toc-link:hover,
+.post-toc-link:focus {
+  color: var(--heading);
+  text-decoration: none;
+}
+
+.post-toc-link.is-active {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.post-toc-h2 {
+  font-size: 0.88rem;
+}
+
+.post-main {
+  min-width: 0;
+}
+
+.post-content mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+  padding-bottom: 0.15rem;
+}
+
 .markdown-body ul,
 .markdown-body ol {
   padding-left: 1.35rem;
@@ -411,6 +510,50 @@ blockquote {
   color: var(--muted);
 }
 
+.post-content blockquote:has(> p:first-child > strong),
+.post-content .callout {
+  margin: 1.35rem 0;
+  padding: 0.95rem 1.1rem 1rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 28%, var(--line));
+  border-left: 4px solid var(--accent);
+  border-radius: 0.5rem;
+  background: color-mix(in srgb, var(--accent) 7%, var(--panel));
+  color: var(--text);
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--accent) 8%, transparent);
+}
+
+.post-content blockquote:has(> p:first-child > strong) > p:first-child,
+.post-content .callout-title {
+  margin: 0 0 0.55rem;
+}
+
+.post-content blockquote:has(> p:first-child > strong) > p:first-child > strong,
+.post-content .callout-title {
+  display: inline-block;
+  color: var(--accent);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.post-content blockquote:has(> p:first-child > strong) > p:not(:first-child),
+.post-content .callout-body {
+  margin: 0;
+  color: var(--text);
+}
+
+.post-content blockquote:has(> p:first-child > strong) > p:not(:first-child) strong,
+.post-content .callout-body strong {
+  color: var(--heading);
+}
+
+:root[data-theme="dark"] .post-content blockquote:has(> p:first-child > strong),
+:root[data-theme="dark"] .post-content .callout {
+  background: color-mix(in srgb, var(--accent) 11%, var(--panel));
+  border-color: color-mix(in srgb, var(--accent) 34%, var(--line));
+}
+
 .site-footer {
   margin-top: 2.5rem;
   padding-top: 1rem;
@@ -432,6 +575,20 @@ blockquote {
 
   .profile-sidebar {
     position: static;
+  }
+
+  .post-layout {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+
+  .post-toc {
+    position: static;
+    max-height: none;
+    padding: 0.85rem 1rem;
+    border: 1px solid var(--line);
+    border-radius: 0.45rem;
+    background: color-mix(in srgb, var(--panel) 92%, var(--line));
   }
 }
 

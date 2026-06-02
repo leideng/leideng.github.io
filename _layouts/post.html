@@ -2,13 +2,20 @@
 layout: default
 ---
 
-<article class="post-shell">
-  <header class="post-header">
-    <p class="section-kicker">Blog</p>
-    <h1>{{ page.title }}</h1>
-    <p class="post-date">{{ page.date | date: "%B %-d, %Y" }}</p>
-  </header>
-  <section class="markdown-body">
-    {{ content }}
-  </section>
+<article class="post-shell post-layout">
+  <aside class="post-toc" aria-label="Table of contents">
+    <p class="post-toc-label">On this page</p>
+    <nav id="post-toc-nav"></nav>
+  </aside>
+
+  <div class="post-main">
+    <header class="post-header">
+      <p class="section-kicker">Blog</p>
+      <h1>{{ page.title }}</h1>
+      <p class="post-date">{{ page.date | date: "%B %-d, %Y" }}</p>
+    </header>
+    <section class="markdown-body post-content">
+      {{ content }}
+    </section>
+  </div>
 </article>

@@ -58,7 +58,9 @@
       </header>
 
       <main class="content-wrap">
-        {% if page.url == '/' %}
+        {% if page.layout == 'post' %}
+        {{ content }}
+        {% elsif page.url == '/' %}
         <div class="home-layout">
           <aside class="profile-sidebar">
             <img class="profile-photo" src="{{ '/photo.jpeg' | relative_url }}" alt="{{ page.profile_name | default: site.title }}">
@@ -115,5 +117,8 @@
       </footer>
     </div>
     <script src="{{ '/assets/js/theme-toggle.js' | relative_url }}"></script>
+    {% if page.layout == 'post' %}
+    <script src="{{ '/assets/js/post-toc.js' | relative_url }}"></script>
+    {% endif %}
   </body>
 </html>
