@@ -8,6 +8,7 @@ timezone: Asia/Shanghai
 kramdown:
   input: GFM
   hard_wrap: false
+  math_engine: mathjax
 
 plugins:
   - jekyll-feed
