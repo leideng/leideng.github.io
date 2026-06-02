@@ -1,3 +1,5 @@
 sources/
 .codex
 uv.lock
+_site/
+scripts/
