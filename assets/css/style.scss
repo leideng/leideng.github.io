@@ -331,6 +331,39 @@ img {
   color: var(--heading);
 }
 
+.markdown-body table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 0 1rem;
+  overflow-x: auto;
+  border-collapse: collapse;
+}
+
+.markdown-body th,
+.markdown-body td {
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--line);
+  vertical-align: top;
+}
+
+.markdown-body th {
+  color: var(--heading);
+  background: rgba(148, 163, 184, 0.12);
+  font-weight: 600;
+}
+
+.markdown-body details {
+  margin: 1rem 0;
+  max-width: 100%;
+}
+
+.markdown-body summary {
+  cursor: pointer;
+  color: var(--heading);
+  font-weight: 600;
+}
+
 .page-header {
   margin-bottom: 1.6rem;
 }

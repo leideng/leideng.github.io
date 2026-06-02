@@ -13,6 +13,20 @@
       })();
     </script>
     {% seo %}
+    {% if page.use_math %}
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [["$", "$"], ["\\(", "\\)"]],
+          displayMath: [["$$", "$$"], ["\\[", "\\]"]]
+        },
+        svg: {
+          fontCache: "global"
+        }
+      };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+    {% endif %}
   </head>
   <body>
     <svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;">
