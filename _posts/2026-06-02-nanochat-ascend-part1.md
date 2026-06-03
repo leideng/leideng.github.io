@@ -266,7 +266,7 @@ I run tokenizer training before any GPT pretraining. From the repo root:
 bash runs/run_tok_train.sh
 ```
 
-`run_tok_train.sh` calls Karpathy’s `tok_train.py` with the following options
+[`run_tok_train.sh`](https://github.com/leideng/nanochat-ascend/blob/ee840874991bafe039f0984aaf1e34bb348f4a7e/runs/run_base_train.sh) calls [`tok_train.py`](https://github.com/leideng/nanochat-ascend/blob/ee840874991bafe039f0984aaf1e34bb348f4a7e/scripts/base_train.py) with the following options
 
 | Flag | Default in `tok_train.py` | Notes |
 |------|---------------------------|--------|
@@ -274,7 +274,7 @@ bash runs/run_tok_train.sh
 | `--doc-cap` | `10_000` | Max characters per document |
 | `--vocab-size` | `32768` | I set this to **32K** (Karpathy’s public runs use **64K**) |
 
-On my A3 machine with 4*80=320 logic CPUs, this took **765 s (~12.8 min)**; I logged the run in [`dev/tok_eval_results/tokenizer-training.md`](https://github.com/leideng/nanochat-ascend/blob/main/dev/tok_eval_results/tokenizer-training.md):
+On my A3 machine with 4*80=320 logic CPUs, this took **765 s (~12.8 min)**; I logged the run in [`dev/tok_eval_results/tokenizer-training.md`](https://github.com/leideng/nanochat-ascend/blob/ee840874991bafe039f0984aaf1e34bb348f4a7e/dev/tok_eval_results/tokenizer-training.md):
 
 | Metric | My run |
 |--------|--------|
@@ -421,7 +421,7 @@ Evaluating the tokenizer...
 
 After training, we can run `tok_eval.py` to see how many bytes each token represents. We define **compression ratio** = UTF-8 bytes / token count (higher is better). Karpathy has already encoded fixed snippets (English news, Korean, Python, LaTeX, science) plus one parquet batch from the train and val splits. I compare the trained tokenizer against OpenAI baselines loaded through tiktoken: **gpt2**, **cl100k_base** (GPT-4), and **o200k_base** (GPT-5). Every case must satisfy `decode(encode(text)) == text`. **Relative diff %** is $(\text{baseline tokens} - \text{my tokens}) / \text{baseline tokens}$; positive means I use fewer tokens than the baseline.
 
-I archived the full tables under [`dev/tok_eval_results/`](https://github.com/leideng/nanochat-ascend/tree/main/dev/tok_eval_results). Below is an excerpt from the log.
+I archived the full tables under [`dev/tok_eval_results/tokenizer-evaluation.md`](https://github.com/leideng/nanochat-ascend/blob/ee840874991bafe039f0984aaf1e34bb348f4a7e/dev/tok_eval_results/tokenizer-evaluation.md). Below is an excerpt from the log.
 
 <details markdown="1">
 <summary>Tokenizer Evaluation Log</summary>
