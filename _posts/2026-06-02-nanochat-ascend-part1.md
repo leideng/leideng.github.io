@@ -1975,4 +1975,4 @@ The table below compares base pretraining runs against upstream nanochat. Depth 
 - [7] Ilya Sutskever, Oriol Vinyals, and Quoc V. Le. *Sequence to Sequence Learning with Neural Networks.* NeurIPS, 2014. [PDF](https://arxiv.org/pdf/1409.3215)
 - [8] Gian Wiher, Clara Meister, and Ryan Cotterell. *On Decoding Strategies for Neural Text Generators.* TACL, 2022. [Paper](https://aclanthology.org/2022.tacl-1.58/)
 - [9] Jared Kaplan, Sam McCandlish, Tom Henighan, Tom B. Brown, Benjamin Chess, Rewon Child, Scott Gray, Alec Radford, Jeffrey Wu, and Dario Amodei. *Scaling Laws for Neural Language Models.* arXiv, 2020. [Paper](https://arxiv.org/abs/2001.08361)
-- [10] DeepSeek-AI. *DeepSeek-V4.* 2025. [PDF](https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro/blob/main/DeepSeek_V4.pdf)
+- [10] DeepSeek-AI. *DeepSeek-V4.* 2026. [PDF](https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro/blob/main/DeepSeek_V4.pdf)
