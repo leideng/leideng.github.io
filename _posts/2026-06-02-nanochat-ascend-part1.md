@@ -564,9 +564,9 @@ we can get any marginal distributions, e.g.,
 $$
 \begin{aligned}
 P_{\text{truth}}(X_1=a)
-&:= \sum_{\substack{\vec{\omega} = (\omega_1,\omega_2,\cdots,\omega_l) \in \Omega_{\text{truth}} \\ \omega_1=a}}
-P_{\text{truth}}(\vec{\omega}) \\
-&=
+&:= \sum_{\substack{\vec{\omega} = (\omega_1,\omega_2,\cdots,\omega_l) \in \Omega_{\text{truth}}: \omega_1=a}}
+P_{\text{truth}}(\vec{\omega})
+=
 \begin{cases}
     1, & \text{if } a=\text{<bos>},  \\
     0, & \text{otherwise.}
@@ -576,8 +576,8 @@ $$
 
 $$
 \begin{aligned}
-&P_{\text{truth}}(X_1=a,X_2=b,X_3=c) \\
-&:= \sum_{\substack{\vec{\omega} = (\omega_1,\omega_2, \omega_3, \cdots,\omega_l) \in \Omega_{\text{truth}} \\ l \ge 3, \omega_1=a, \omega_2=b, \omega_3=c}}
+&P_{\text{truth}}(X_1=a,X_2=b,X_3=c) 
+:= \sum_{\substack{\vec{\omega} = (\omega_1,\omega_2, \omega_3, \cdots,\omega_l) \in \Omega_{\text{truth}}: l \ge 3, \omega_1=a, \omega_2=b, \omega_3=c}}
 P_{\text{truth}}(\vec{\omega}).
 \end{aligned}
 $$
@@ -585,8 +585,8 @@ $$
 
 $$
 \begin{aligned}
-&P_{\text{truth}}(X_3=c) \\
-&:= \sum_{\substack{\vec{\omega} = (\omega_1,\omega_2, \omega_3, \cdots,\omega_l) \in \Omega_{\text{truth}} \\ l \ge 3, \omega_3=c}}
+&P_{\text{truth}}(X_3=c) 
+:= \sum_{\substack{\vec{\omega} = (\omega_1,\omega_2, \omega_3, \cdots,\omega_l) \in \Omega_{\text{truth}}: l \ge 3, \omega_3=c}}
 P_{\text{truth}}(\vec{\omega})
 \end{aligned}
 $$
