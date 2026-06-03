@@ -115,14 +115,14 @@ $$
 such that reconstruction is exact,
 
 $$
-T_{dec}(T_{enc}( \vec{x} )) = \vec{x} \quad \text{for all } \vec{x} \in \Sigma^{\ast},
+T_{dec}(T_{enc}( \vec{x} )) = \vec{x} \quad  \forall \vec{x} \in \Sigma^{\ast},
 $$
 
-and the encoded sequence {::nomarkdown}$T_{enc}(\vec{x}) = (t_1,\cdots,t_{L(\vec{x})})${:/nomarkdown} has length $L(\vec{x})$ in tokens. The goal is to **minimize the average number of tokens** under a data distribution {::nomarkdown}$p_{\mathrm{data}}${:/nomarkdown} over byte strings (or over strings seen in training):
+and the encoded sequence {::nomarkdown}$T_{enc}(\vec{x}) = (t_1,\cdots,t_{L(\vec{x})})${:/nomarkdown} has length $L(\vec{x})$ in tokens. The goal is to **minimize the average number of tokens** under a data distribution {::nomarkdown}$P_{\text{data}}${:/nomarkdown} over byte strings (or over strings seen in training):
 
 $$
 \begin{aligned}
-&\min_{T_{enc},T_{dec},\mathcal{V}} \mathbb{E}_{\vec{x} \sim p_{\mathrm{data}}}\big[L(\vec{x})\big] \\
+&\min_{T_{enc},T_{dec},\mathcal{V}} \mathbb{E}_{\vec{x} \sim P_{\text{data}}}\big[L(\vec{x})\big] \\
 &\quad \text{subject to} \quad |\mathcal{V}| = V, \quad
 T_{dec}(T_{enc}(\vec{x})) = \vec{x}, \quad \forall \vec{x} \in \Sigma^{\ast}.
 \end{aligned}
