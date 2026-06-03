@@ -224,9 +224,9 @@ We can compare BPE with Huffman coding as follows.
 
 So BPE is a **lossless segmentation codec** whose “codewords” are variable-length byte strings with prefix overlaps; `merge_list` plays the role Huffman’s prefix property plays for bitstreams.
 
-#### Performance guarantee (Zouhar et al., 2023)
+#### Performance guarantee 
 
-[[2]](https://aclanthology.org/2023.findings-acl.38v2.pdf) formalizes BPE training as maximizing **compression utility** on a string $\vec{x}$:
+Paper [[2]](https://aclanthology.org/2023.findings-acl.38v2.pdf) formalizes BPE training as maximizing **compression utility** on a string $\vec{x}$:
 
 $$
 \kappa_{\vec{x}}(\mu) := |\vec{x}| - \big|\mathrm{APPLY}_\mu(\vec{x})\big|,
@@ -263,7 +263,6 @@ The main hyperparameter I changed versus Karpathy’s public **$2^{16}$** runs i
 I run tokenizer training before any GPT pretraining. From the repo root:
 
 ```bash
-source runs/set_env.sh
 bash runs/run_tok_train.sh
 ```
 
