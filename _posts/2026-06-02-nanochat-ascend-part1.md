@@ -1001,8 +1001,8 @@ NTP-based token-level measure.  For any {::nomarkdown}$\vec{\omega} = (\omega_1,
 
 $$
 \begin{aligned}
-\log \frac{P_{\text{data}}(\vec{\omega})}{P_\theta(\vec{\omega})} \\
-= \log \frac{ \prod_{t=1}^l P_{\text{data}}(\omega_t \mid \vec{\omega}_{\lt t}) }{  \prod_{t=1}^l P_{\theta}(\omega_t \mid \vec{\omega}_{\lt t})  } \\
+\log \frac{P_{\text{data}}(\vec{\omega})}{P_\theta(\vec{\omega})} 
+= \log \frac{ \prod_{t=1}^l P_{\text{data}}(\omega_t \mid \vec{\omega}_{\lt t}) }{  \prod_{t=1}^l P_{\theta}(\omega_t \mid \vec{\omega}_{\lt t})  } 
 = \sum_{t=1}^{l} \log \frac{P_{\text{data}}(\omega_t \mid \vec{\omega}_{\lt t})}{P_\theta(\omega_t \mid \vec{\omega}_{\lt t})}.
 \end{aligned}
 $$
@@ -1037,7 +1037,7 @@ $$
 &=\sum_{\vec{\omega} \in \Omega_{\text{data}}} P_{\text{data}} (\vec{X} = \vec{\omega})
 \left[\mathbb{1}_{\{t \le l\}}\, \log \frac{P_{\text{data}}(\omega_t \mid \vec{\omega}_{\lt t})}{P_\theta(\omega_t \mid \vec{\omega}_{\lt t})}\right] \\
 &=\sum_{ (\vec{\omega}_{\lt t}, \omega_t) \in \Omega_{\text{data},t}}
-\left[ \sum_{\substack{\vec{\nu} \in \Omega_{\text{data}} \\ t \le l,\, \vec{\nu}_{\lt t}=\vec{\omega}_{\lt t},\, \nu_t = \omega_t}}
+\left[ \sum_{\substack{\vec{\nu} \in \Omega_{\text{data}}: t \le l,\, \vec{\nu}_{\lt t}=\vec{\omega}_{\lt t},\, \nu_t = \omega_t}}
 P_{\text{data}} (\vec{X} = \vec{\nu})  \right]
 \cdot \left[\log \frac{P_{\text{data}}(\omega_t \mid \vec{\omega}_{\lt t})}{P_\theta(\omega_t \mid \vec{\omega}_{\lt t})}\right] \\
 &=\sum_{ (\vec{\omega}_{\lt t}, \omega_t) \in \Omega_{\text{data},t}}  P_{\text{data}} (\vec{\omega}_{\lt t}, \omega_t)
@@ -1052,12 +1052,12 @@ By the law of total expectations conditioning on {::nomarkdown}$\vec{X}_{\lt t}=
 $$
 \begin{aligned}
 \mathrm{KL}(P_{\text{data}}\|P_\theta)
-&= \sum_{t = 1}^{L_{\max}} \sum_{\substack{\vec{\omega}_{\lt t} \\ N_{\text{data}, \vec{\omega}_{\lt t}} \gt 0}}
-P_{\text{data}}(\vec{X}_{\lt t} = \vec{\omega}_{\lt t} ) \\
-&\quad \cdot \mathbb{E}_{ (\vec{X}_{\lt t}, X_t) \sim P_{\text{data},t}}\!\left[
+&= \sum_{t = 1}^{L_{\max}} \sum_{\vec{\omega}_{\lt t} \in \Omega_{\text{data}, {\lt t}}}
+P_{\text{data}}(\vec{X}_{\lt t} = \vec{\omega}_{\lt t} ) 
+ \cdot \mathbb{E}_{ (\vec{X}_{\lt t}, X_t) \sim P_{\text{data},t}}\!\left[
 \left. \log \frac{P_{\text{data}}(X_t \mid \vec{X}_{\lt t})}{P_\theta(X_t \mid \vec{X}_{\lt t})}
 \right|  \vec{X}_{\lt t} = \vec{\omega}_{\lt t} \right] \\
-&= \sum_{t = 1}^{L_{\max}} \sum_{\substack{\vec{\omega}_{\lt t} \\ N_{\text{data}, \vec{\omega}_{\lt t}} \gt 0}}
+&= \sum_{t = 1}^{L_{\max}} \sum_{\vec{\omega}_{\lt t} \in \Omega_{\text{data}, {\lt t}} }
 \left[ P_{\text{data}}(\vec{X}_{\lt t} = \vec{\omega}_{\lt t} ) \cdot
 \mathrm{KL}\!\left(P_{\text{data}}(\cdot \mid \vec{\omega}_{\lt t}) \,\big\|\, P_\theta(\cdot \mid \vec{\omega}_{\lt t})\right)
 \right] \\
@@ -1072,13 +1072,13 @@ where {::nomarkdown}$\vec{X}_{\lt t} \sim P_{\text{data},\lt t}${:/nomarkdown} m
 $$
 \begin{aligned}
 &\mathbb{E}_{ (\vec{X}_{\lt t}, X_t) \sim P_{\text{data},t}}\!\left[ \left. \log \frac{P_{\text{data}}(X_t \mid \vec{X}_{\lt t})}{P_\theta(X_t \mid \vec{X}_{\lt t})} \right|  \vec{X}_{\lt t} = \vec{\omega}_{\lt t} \right] \\
-&= \sum_{ (\nu_{\lt t}, \nu_t) \in \Omega_{\text{data},t}} P_{\text{data}} \left( (\vec{X}_{\lt t}, X_t)=(\nu_{\lt t}, \nu_t) \mid \vec{X}_{\lt t} = \vec{\omega}_{\lt t} \right)
+&= \sum_{ (\vec{\nu}_{\lt t}, \nu_t) \in \Omega_{\text{data},t}} P_{\text{data}} \left( (\vec{X}_{\lt t}, X_t)=(\vec{\nu}_{\lt t}, \nu_t) \mid \vec{X}_{\lt t} = \vec{\omega}_{\lt t} \right)
 \cdot \left[ \log \frac{P_{\text{data}}(\nu_t \mid \vec{\nu}_{\lt t})}{P_\theta(\nu_t \mid \vec{\nu}_{\lt t})} \right] \\
 &= \sum_{ \nu_t \in \mathcal{V} \cup \{ \text{<bos>} \}} P_{\text{data}} \left( X_t=\nu_t \mid \vec{X}_{\lt t} = \vec{\omega}_{\lt t} \right)
 \cdot \left[ \log \frac{P_{\text{data}}(\nu_t \mid \vec{\omega}_{\lt t})}{P_\theta(\nu_t \mid \vec{\omega}_{\lt t})} \right] \\
 &= \sum_{ \nu_t \in \mathcal{V} \cup \{ \text{<bos>} \} } P_{\text{data}} (\nu_t \mid \vec{\omega}_{\lt t})
-\cdot \left[ \log \frac{P_{\text{data}}(\nu_t \mid \vec{\omega}_{\lt t})}{P_\theta(\nu_t \mid \vec{\omega}_{\lt t})} \right]
-=\mathrm{KL}\!\left(P_{\text{data}}(\cdot \mid \vec{\omega}_{\lt t}) \,\big\|\, P_\theta(\cdot \mid \vec{\omega}_{\lt t})\right).
+\cdot \left[ \log \frac{P_{\text{data}}(\nu_t \mid \vec{\omega}_{\lt t})}{P_\theta(\nu_t \mid \vec{\omega}_{\lt t})} \right] \\
+&=\mathrm{KL}\!\left(P_{\text{data}}(\cdot \mid \vec{\omega}_{\lt t}) \,\big\|\, P_\theta(\cdot \mid \vec{\omega}_{\lt t})\right).
 \end{aligned}
 $$
 
@@ -1105,7 +1105,7 @@ $$
 &= \sum_{t = 1}^{L_{\max}} \left\{ \frac{1}{ \sum_{n=1}^N \mathbb{1}_{ \{ t \le l_n \} }}
 \sum_{n=1}^N \left[ \mathbb{1}_{ \{ t \le l_n \} }
 \cdot \mathrm{KL}\!\left(P_{\text{data}}(\cdot \mid \vec{x}^n_{\lt t}) \,\big\|\, P_\theta(\cdot \mid \vec{x}^n_{\lt t})\right) \right] \right\} \\
-&= \sum_{t = 1}^{L_{\max}} \left[ \frac{ \sum_{n=1}^N  \left[ \mathbb{1}_{ \{ t \le l_n \} } \cdot \mathrm{KL}\!\left(P_{\text{data}}(\cdot \mid \vec{x}^n_{\lt t}) \,\big\|\, P_\theta(\cdot \mid \vec{x}^n_{\lt t})\right) \right]  }{ \sum_{n=1}^N \mathbb{1}_{ \{ t \le l_n \} }}  \right]
+&= \sum_{t = 1}^{L_{\max}} \left[ \frac{ \sum_{n=1}^N  \left[ \mathbb{1}_{ \{ t \le l_n \} } \cdot \mathrm{KL}\!\left(P_{\text{data}}(\cdot \mid \vec{x}^n_{\lt t}) \,\big\|\, P_\theta(\cdot \mid \vec{x}^n_{\lt t})\right) \right]  }{ \sum_{n=1}^N \mathbb{1}_{ \{ t \le l_n \} }}  \right].
 \end{aligned}
 $$
 
@@ -1130,15 +1130,15 @@ Each filled cell below is one term $f(n,t)$; empty cells mean sequence $n$ is to
  x^5, l=4  | f(5,1)   | f(5,2)   | f(5,3)   | f(5,4)   |
 ```
 
-The last line of the derivation is then “sum the column, divide by the number of filled cells, repeat for each $t$”:
+The last line of the derivation is then "sum the column, divide by the number of filled cells, repeat for each $t$":
 
 $$
 \begin{aligned}
-\mathrm{KL}(P_{\text{data}}\|P_\theta) \\
-= \underbrace{\frac{f(1,1)+f(2,1)+f(3,1)+f(4,1)+f(5,1)}{5}}_{t=1} \\
-+ \underbrace{\frac{f(1,2)+f(2,2)+f(3,2)+f(4,2)+f(5,2)}{5}}_{t=2} \\
-+ \underbrace{\frac{f(2,3)+f(3,3)+f(4,3)+f(5,3)}{4}}_{t=3} \\
-+ \underbrace{\frac{f(4,4)+f(5,4)}{2}}_{t=4}.
+\mathrm{KL}(P_{\text{data}}\|P_\theta) 
+& = \underbrace{\frac{f(1,1)+f(2,1)+f(3,1)+f(4,1)+f(5,1)}{5}}_{t=1} \\
+& + \underbrace{\frac{f(1,2)+f(2,2)+f(3,2)+f(4,2)+f(5,2)}{5}}_{t=2} \\
+& + \underbrace{\frac{f(2,3)+f(3,3)+f(4,3)+f(5,3)}{4}}_{t=3} \\
+& + \underbrace{\frac{f(4,4)+f(5,4)}{2}}_{t=4}.
 \end{aligned}
 $$
 
