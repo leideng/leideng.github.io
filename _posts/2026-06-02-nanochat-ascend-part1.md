@@ -640,8 +640,8 @@ the valid token sequence in {::nomarkdown}$\Omega_{\text{truth}}${:/nomarkdown} 
 $$
 \begin{aligned}
 \vec{y^*}
-&:= \arg\max_{\vec{y}: (\vec{x},\vec{y}) \in \Omega_{\text{truth}}}  P_{\text{truth}}( \vec{x},\vec{y} ) \\
-&= \arg\max_{\vec{y}: (\vec{x},\vec{y}) \in \Omega_{\text{truth}}}  P_{\text{truth}} ( \vec{y} \mid \vec{x} ).
+&:= \arg\max_{\vec{y}: (\vec{x},\vec{y}) \in \Omega_{\text{truth}}}  P_{\text{truth}}( \vec{x},\vec{y} ) 
+= \arg\max_{\vec{y}: (\vec{x},\vec{y}) \in \Omega_{\text{truth}}}  P_{\text{truth}} ( \vec{y} \mid \vec{x} ).
 \end{aligned}
 $$
 
@@ -661,14 +661,17 @@ By the chain rule, we have
 $$
 \begin{aligned}
 P_{\text{truth}} ( \vec{y} \mid \vec{x} )
-&= \prod_{t=i}^{l} P_{\text{truth}} (y_t \mid x_1,x_2,\cdots,x_{i-1}, y_i, \cdots, y_{t-1}), \\
-&\qquad i \ge 1
+&= \prod_{t=i}^{l} P_{\text{truth}} (y_t \mid x_1,x_2,\cdots,x_{i-1}, y_i, \cdots, y_{t-1}),  \qquad i \ge 1
 \end{aligned}
 $$
 
 with the convention {::nomarkdown}$P_{\text{truth}}(X_1 = \text{&lt;bos&gt;} \mid \emptyset) = 1${:/nomarkdown}.
 Now we have factorized the conditional probability {::nomarkdown}$P_{\text{truth}} ( \vec{y} \mid \vec{x} )${:/nomarkdown} into $l-i+1$ next-token
-conditional probabilities {::nomarkdown}$P_{\text{truth}} (y_t \mid x_1,x_2,\cdots,x_{i-1}, y_i, \cdots, y_{t-1})${:/nomarkdown}.
+conditional probabilities 
+
+$$
+P_{\text{truth}} (y_t \mid x_1,x_2,\cdots,x_{i-1}, y_i, \cdots, y_{t-1}).
+$$
 
 
 To proceed further analysis, let us define
@@ -687,14 +690,15 @@ In general, {::nomarkdown}$P_{\text{truth}} (\omega_t \mid \vec{\omega}_{\lt t})
 $$
 \begin{aligned}
 P_{\text{truth}} (\omega_t \mid \vec{\omega}_{\lt t})
-&= \frac{P_{\text{truth}} (\vec{\omega}_{\lt t}, \omega_t)}{P_{\text{truth}} (\vec{\omega}_{\lt t})} \\
-&= \frac{
-\sum\limits_{\substack{\vec{\nu} \in \Omega_{\text{truth}} \\ \nu_{\lt t} = \omega_{\lt t},\, \nu_t=\omega_t}}
-P_{\text{truth}} (\vec{\nu})
-}{
-\sum\limits_{\substack{\vec{\nu} \in \Omega_{\text{truth}} \\ \nu_{\lt t} = \omega_{\lt t}}}
+= \frac{P_{\text{truth}} (\vec{\omega}_{\lt t}, \omega_t)}{P_{\text{truth}} (\vec{\omega}_{\lt t})} 
+= \frac{
+\sum\limits_{\substack{\vec{\nu} \in \Omega_{\text{truth}}: \vec{\nu}_{\lt t} = \vec{\omega}_{\lt t},\, \nu_t=\omega_t}}
 P_{\text{truth}} (\vec{\nu})
 }
+{
+\sum\limits_{\substack{\vec{\nu} \in \Omega_{\text{truth}}: \vec{\nu}_{\lt t} = \vec{\omega}_{\lt t}}}
+P_{\text{truth}} (\vec{\nu})
+}.
 \end{aligned}
 $$
 
