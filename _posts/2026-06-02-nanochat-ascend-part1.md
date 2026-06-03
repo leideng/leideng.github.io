@@ -545,7 +545,13 @@ We now assume that random vector {::nomarkdown}$\vec{X} \in \Omega_{\text{truth}
 Since a probability measure defines the probability over any events of the sample space (i.e., any subset of the sample space),
 we can then get whatever joint probabilities and marginal probabilities under measure {::nomarkdown}$P_{\text{truth}}${:/nomarkdown}.
 For the current subsection, we will define {::nomarkdown}$P_{\text{truth}}${:/nomarkdown} as a usual probability distribution over each element in the sample space.
-First, the probability of {::nomarkdown}$\vec{X} = \vec{\omega} = (\omega_1,\omega_2,\cdots, \omega_l) \in \Omega_{\text{truth}}${:/nomarkdown} is {::nomarkdown}$P_{\text{truth}}(\vec{\omega})${:/nomarkdown}, which is the joint probability that
+First, the probability of 
+
+$$
+\vec{X} = \vec{\omega} = (\omega_1,\omega_2,\cdots, \omega_l) \in \Omega_{\text{truth}}
+$$
+
+is {::nomarkdown}$P_{\text{truth}}(\vec{\omega})${:/nomarkdown}, which is the joint probability that
 {::nomarkdown}$L=l, X_1=\omega_1, X_2=\omega_2, \cdots, X_l = \omega_l${:/nomarkdown}, i.e.,
 
 $$
