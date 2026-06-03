@@ -1597,8 +1597,8 @@ Let us define the global cross-entropy (NLL) loss function and per-data-sample s
 
 $$
 \begin{aligned}
-\mathcal{L}(\theta) := \frac{1}{N}  \sum_{n=1}^N   \sum_{t = 1}^{L_{\max}} \left( - \log P_\theta( x^n_t \mid \vec{x}^n_{\lt t}) \right), \\
-\mathcal{L}^n(\theta) := \sum_{t = 1}^{L_{\max}} \left( - \log P_\theta( x^n_t \mid \vec{x}^n_{\lt t}) \right).
+& \mathcal{L}(\theta) := \frac{1}{N}  \sum_{n=1}^N   \sum_{t = 1}^{L_{\max}} \left( - \log P_\theta( x^n_t \mid \vec{x}^n_{\lt t}) \right), \\
+& \mathcal{L}^n(\theta) := \sum_{t = 1}^{L_{\max}} \left( - \log P_\theta( x^n_t \mid \vec{x}^n_{\lt t}) \right).
 \end{aligned}
 $$
 
@@ -1641,10 +1641,10 @@ We can then index the pretraining dataset by tuple (mini-batch-index, sample-ind
 - ...
 - Mini-Batch $M=\frac{N}{B}$:  data sample $(M,1)$, data sample $(M,2)$, ..., data sample $(M, B)$.
 
-We still have in total $N$ data samples but organize them into 2D grid manner instead of 1D linear manner. Data sample $(b,i)$ of length {::nomarkdown}$L_{\max}${:/nomarkdown} is denoted as
+We still have in total $N$ data samples but organize them into 2D grid manner instead of 1D linear manner. Data sample $(b,i)$ of length $L_{\max}$ is denoted as
 
 $$
-\vec{x}^{(b,i)} = \left(x^{(b,i)}_1, x^{(b,i)}_2, \cdots, x^{(b,i)}_{L_{\max}} \right), \qquad b=1,2,\cdots, M, i=1,2,\cdots, B
+\qquad \vec{x}^{(b,i)} = \left(x^{(b,i)}_1, x^{(b,i)}_2, \cdots, x^{(b,i)}_{L_{\max}} \right), \qquad b=1,2,\cdots, M, i=1,2,\cdots, B
 $$.
 
 Now we have the following 2D loss function notations and gradient notations
@@ -1660,8 +1660,8 @@ Let us further define the per-mini-batch average loss and average gradient as
 
 $$
 \begin{aligned}
-\mathcal{L}^{(b)}(\theta) =  \frac{1} {B} \sum_{i=1}^B  \mathcal{L}^{(b,i)}(\theta), \\
-\nabla_\theta \mathcal{L}^{(b)} (\theta) = \frac{1}{B} \sum_{i=1}^B  \nabla_\theta \mathcal{L}^{(b,i)}(\theta).
+& \mathcal{L}^{(b)}(\theta) =  \frac{1} {B} \sum_{i=1}^B  \mathcal{L}^{(b,i)}(\theta), \\
+& \nabla_\theta \mathcal{L}^{(b)} (\theta) = \frac{1}{B} \sum_{i=1}^B  \nabla_\theta \mathcal{L}^{(b,i)}(\theta).
 \end{aligned}
 $$
 
@@ -1669,10 +1669,10 @@ Then we can get the global loss function and gradient as follows
 
 $$
 \begin{aligned}
-\mathcal{L}(\theta) &= \frac{1}{MB}  \sum_{b=1}^M \sum_{i=1}^B  \mathcal{L}^{(b,i)}(\theta) = \frac{1}{N}  \sum_{b=1}^M \sum_{i=1}^B  \mathcal{L}^{(b,i)}(\theta) \\
-&= \frac{1}{M}  \sum_{b=1}^M  \left[ \frac{1} {B} \sum_{i=1}^B  \mathcal{L}^{(b,i)}(\theta) \right] = \frac{1}{M}  \sum_{b=1}^M \mathcal{L}^{(b)}(\theta), \\
-\nabla_{\theta} \mathcal{L}(\theta) &= \frac{1}{MB}  \sum_{b=1}^M \sum_{i=1}^B  \nabla_\theta \mathcal{L}^{(b,i)}(\theta) = \frac{1}{N}  \sum_{b=1}^M \sum_{i=1}^B  \nabla_\theta  \mathcal{L}^{(b,i)}(\theta) \\
-&= \frac{1}{M}  \sum_{b=1}^M \left[ \frac{1}{B} \sum_{i=1}^B  \nabla_\theta \mathcal{L}^{(b,i)}(\theta) \right] = \frac{1}{M}  \sum_{b=1}^M \nabla_\theta \mathcal{L}^{(b)} (\theta) .
+& \mathcal{L}(\theta) = \frac{1}{MB}  \sum_{b=1}^M \sum_{i=1}^B  \mathcal{L}^{(b,i)}(\theta) = \frac{1}{N}  \sum_{b=1}^M \sum_{i=1}^B  \mathcal{L}^{(b,i)}(\theta) 
+= \frac{1}{M}  \sum_{b=1}^M  \left[ \frac{1} {B} \sum_{i=1}^B  \mathcal{L}^{(b,i)}(\theta) \right] = \frac{1}{M}  \sum_{b=1}^M \mathcal{L}^{(b)}(\theta), \\
+& \nabla_{\theta} \mathcal{L}(\theta) = \frac{1}{MB}  \sum_{b=1}^M \sum_{i=1}^B  \nabla_\theta \mathcal{L}^{(b,i)}(\theta) = \frac{1}{N}  \sum_{b=1}^M \sum_{i=1}^B  \nabla_\theta  \mathcal{L}^{(b,i)}(\theta) 
+= \frac{1}{M}  \sum_{b=1}^M \left[ \frac{1}{B} \sum_{i=1}^B  \nabla_\theta \mathcal{L}^{(b,i)}(\theta) \right] = \frac{1}{M}  \sum_{b=1}^M \nabla_\theta \mathcal{L}^{(b)} (\theta) .
 \end{aligned}
 $$
 
@@ -1681,11 +1681,11 @@ we have that
 
 $$
 \begin{aligned}
-\mathbb{E} \left[ \mathcal{L}^{(b)}(\theta) \right] = \mathbb{E} \left[ \mathcal{L}^{(\tilde{b})}(\theta) \right] \\
-=  \mathbb{E} \left[ \frac{1}{M}  \sum_{b=1}^M \mathcal{L}^{(b)}(\theta) \right] \\
+& \mathbb{E} \left[ \mathcal{L}^{(b)}(\theta) \right] = \mathbb{E} \left[ \mathcal{L}^{(\tilde{b})}(\theta) \right] 
+=  \mathbb{E} \left[ \frac{1}{M}  \sum_{b=1}^M \mathcal{L}^{(b)}(\theta) \right] 
 =   \mathbb{E} \left[ \mathcal{L}(\theta) \right], \\
-\mathbb{E} \left[ \nabla_\theta \mathcal{L}^{(b)} (\theta) \right] = \mathbb{E} \left[ \nabla_\theta \mathcal{L}^{(\tilde{b})}  (\theta) \right] \\
-= \mathbb{E} \left[  \frac{1}{M}  \sum_{b=1}^M \nabla_\theta \mathcal{L}^{(b)} (\theta) \right] \\
+& \mathbb{E} \left[ \nabla_\theta \mathcal{L}^{(b)} (\theta) \right] = \mathbb{E} \left[ \nabla_\theta \mathcal{L}^{(\tilde{b})}  (\theta) \right] 
+= \mathbb{E} \left[  \frac{1}{M}  \sum_{b=1}^M \nabla_\theta \mathcal{L}^{(b)} (\theta) \right] 
 = \mathbb{E} \left[ \nabla_{\theta} \mathcal{L}(\theta) \right].
 \end{aligned}
 $$
@@ -1696,10 +1696,10 @@ that all data samples follow the same distribution and all independent, namely, 
 
 $$
 \begin{aligned}
-\mathrm{Var} \left[ \nabla_\theta \mathcal{L}^{(b)} (\theta) \right]
-&= \mathrm{Var} \left[ \frac{1}{B} \sum_{i=1}^B \nabla_\theta \mathcal{L}^{(b,i)} (\theta) \right] = \frac{\sigma^2}{B}, \\
-\mathrm{Var} \left[ \nabla_\theta \mathcal{L} (\theta) \right]
-&= \mathrm{Var} \left[ \frac{1}{MB} \sum_{b=1}^M \sum_{i=1}^B \nabla_\theta \mathcal{L}^{(b,i)} (\theta) \right] = \frac{\sigma^2}{MB}.
+& \mathrm{Var} \left[ \nabla_\theta \mathcal{L}^{(b)} (\theta) \right]
+= \mathrm{Var} \left[ \frac{1}{B} \sum_{i=1}^B \nabla_\theta \mathcal{L}^{(b,i)} (\theta) \right] = \frac{\sigma^2}{B}, \\
+& \mathrm{Var} \left[ \nabla_\theta \mathcal{L} (\theta) \right]
+= \mathrm{Var} \left[ \frac{1}{MB} \sum_{b=1}^M \sum_{i=1}^B \nabla_\theta \mathcal{L}^{(b,i)} (\theta) \right] = \frac{\sigma^2}{MB}.
 \end{aligned}
 $$
 
