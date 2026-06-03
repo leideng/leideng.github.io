@@ -1162,11 +1162,12 @@ For two distributions $p$ and $q$ over the same sample space $\mathcal{X}$, we h
 
 $$
 \begin{aligned}
-\mathrm{KL}(p \,\|\, q) = \mathbb{E}_{X \sim p}\!\left[\log \frac{p(X)}{q(X)}\right] \\
+\mathrm{KL}(p \,\|\, q) 
+& = \mathbb{E}_{X \sim p}\!\left[\log \frac{p(X)}{q(X)}\right] 
 = \sum_{x \in \mathcal{X}} p(x) \log \frac{p(x)}{q(x)} \\
-= \sum_{x \in \mathcal{X}} p(x) \log p(x) - \sum_{x \in \mathcal{X}} p(x) \log q(x) \\
-= - \left[ -\sum_{x \in \mathcal{X}} p(x) \log p(x) \right] + \left[- \sum_{x \in \mathcal{X}} p(x) \log q(x) \right] \\
-= - H(p) + H(p,q).
+& = \sum_{x \in \mathcal{X}} p(x) \log p(x) - \sum_{x \in \mathcal{X}} p(x) \log q(x) \\
+& = - \left[ -\sum_{x \in \mathcal{X}} p(x) \log p(x) \right] + \left[- \sum_{x \in \mathcal{X}} p(x) \log q(x) \right] \\
+& = - H(p) + H(p,q).
 \end{aligned}
 $$
 
@@ -1190,7 +1191,7 @@ For our studied token-level KL divergence, we thus have
 
 $$
 \begin{aligned}
-\mathrm{KL}\!\left(P_{\text{data}}(\cdot \mid \vec{x}^n_{\lt t}) \,\big\|\, P_\theta(\cdot \mid \vec{x}^n_{\lt t})\right) \\
+\mathrm{KL}\!\left(P_{\text{data}}(\cdot \mid \vec{x}^n_{\lt t}) \,\big\|\, P_\theta(\cdot \mid \vec{x}^n_{\lt t})\right) 
 = -H(P_{\text{data}}(\cdot\mid \vec{x}^n_{\lt t})) + H(P_{\text{data}}(\cdot\mid \vec{x}^n_{\lt t}),\,P_\theta(\cdot\mid \vec{x}^n_{\lt t}))
 \end{aligned}
 $$
@@ -1200,7 +1201,7 @@ minimize the token-level KL divergence is equivalent to minimize the token-level
 
 $$
 \begin{aligned}
-\arg\min_\theta \mathrm{KL}\!\left(P_{\text{data}}(\cdot \mid \vec{x}^n_{\lt t}) \,\big\|\, P_\theta(\cdot \mid \vec{x}^n_{\lt t})\right) \\
+\arg\min_\theta \mathrm{KL}\!\left(P_{\text{data}}(\cdot \mid \vec{x}^n_{\lt t}) \,\big\|\, P_\theta(\cdot \mid \vec{x}^n_{\lt t})\right) 
 = \arg\min_\theta H(P_{\text{data}}(\cdot\mid \vec{x}^n_{\lt t}),\,P_\theta(\cdot\mid \vec{x}^n_{\lt t})).
 \end{aligned}
 $$
@@ -1284,9 +1285,9 @@ same optimal parameter $\theta^*$ and a constant gap on the optimal values, i.e.
 
 $$
 \begin{aligned}
-\theta^* = \arg\min_\theta \mathrm{KL}\!\left(P_{\text{data}} \,\|\, P_\theta\right) \\
+& \theta^* = \arg\min_\theta \mathrm{KL}\!\left(P_{\text{data}} \,\|\, P_\theta\right) 
 = \arg\min_\theta H(P_{\text{data}}, P_{\theta}); \\
-H(P_{\text{data}}, P_{\theta^*}) = H(P_{\text{data}}) + \mathrm{KL}\!\left(P_{\text{data}} \,\|\, P_\theta^*\right),
+& H(P_{\text{data}}, P_{\theta^*}) = H(P_{\text{data}}) + \mathrm{KL}\!\left(P_{\text{data}} \,\|\, P_\theta^*\right),
 \end{aligned}
 $$
 
@@ -1310,11 +1311,11 @@ $$
 
 Note that the token-level cross entropy between conditional probabilities {::nomarkdown}$H(P_{\text{data}}(\cdot\mid \vec{x}^n_{\lt t}),\,P_\theta(\cdot\mid \vec{x}^n_{\lt t})) ${:/nomarkdown} cannot be computed by a single data sample,
 but need to be computed based on all data samples with the same prefix subsequence {::nomarkdown}$\vec{x}^n_{\lt t}${:/nomarkdown}.
-It is possible that   {::nomarkdown}$\vec{x}^n_{\lt t} = \vec{x}^{\tilde{n}}_{\lt t}${:/nomarkdown} for some $\tilde{n} \neq n$, and thus both $x^n$ and $x^{\tilde{n}}$ will contribute to the conditional probability {::nomarkdown}$P_{\text{data}}(\cdot\mid \vec{x}^n_{\lt t})${:/nomarkdown}. This makes the cross-entropy computation difficult because of the coupling between data samples. We seek to compute the individual contribution to the cross-entropy for any individual data sample **simply based on itself**. Towards that end, let us rephrase the position-$t$ total cross-entropy as follows,
+It is possible that   {::nomarkdown}$\vec{x}^n_{\lt t} = \vec{x}^{\tilde{n}}_{\lt t}${:/nomarkdown} for some $\tilde{n} \neq n$, and thus both $\vec{x}^n$ and $\vec{x}^{\tilde{n}}$ will contribute to the conditional probability {::nomarkdown}$P_{\text{data}}(\cdot\mid \vec{x}^n_{\lt t})${:/nomarkdown}. This makes the cross-entropy computation difficult because of the coupling between data samples. We seek to compute the individual contribution to the cross-entropy for any individual data sample **simply based on itself**. Towards that end, let us rephrase the position-$t$ total cross-entropy as follows,
 
 $$
 \begin{aligned}
-\sum_{n=1}^N  \left[ \mathbb{1}_{ \{ t \le l_n \} } \cdot H(P_{\text{data}}(\cdot\mid \vec{x}^n_{\lt t}),\,P_\theta(\cdot\mid \vec{x}^n_{\lt t})) \right]
+& \sum_{n=1}^N  \left[ \mathbb{1}_{ \{ t \le l_n \} } \cdot H(P_{\text{data}}(\cdot\mid \vec{x}^n_{\lt t}),\,P_\theta(\cdot\mid \vec{x}^n_{\lt t})) \right] \\
 &= \sum_{\vec{\omega}_{\lt t} \in \Omega_{\text{data}, \lt t}} \left[ \mathbb{1}_{ \{ t \le l_n \} } \cdot N_{\text{data}, \vec{\omega}_{\lt t}} \cdot H(P_{\text{data}}(\cdot\mid \vec{\omega}_{\lt t}),\,P_\theta(\cdot\mid \vec{\omega}_{\lt t})) \right].
 \end{aligned}
 $$
@@ -1330,8 +1331,8 @@ Now we have
 
 $$
 \begin{aligned}
-\sum_{n=1}^N  \left[ \mathbb{1}_{ \{ t \le l_n \} } \cdot H(P_{\text{data}}(\cdot\mid \vec{x}^n_{\lt t}),\,P_\theta(\cdot\mid \vec{x}^n_{\lt t})) \right]
-&= \sum_{\vec{\omega}_{\lt t} \in \Omega_{\text{data}, \lt t}} \left[ \mathbb{1}_{ \{ t \le l_n \} } \cdot N_{\text{data}, \vec{\omega}_{\lt t}} \cdot H(P_{\text{data}}(\cdot\mid \vec{\omega}_{\lt t}),\,P_\theta(\cdot\mid \vec{\omega}_{\lt t})) \right] \\
+& \sum_{n=1}^N  \left[ \mathbb{1}_{ \{ t \le l_n \} } \cdot H(P_{\text{data}}(\cdot\mid \vec{x}^n_{\lt t}),\,P_\theta(\cdot\mid \vec{x}^n_{\lt t})) \right] \\
+& = \sum_{\vec{\omega}_{\lt t} \in \Omega_{\text{data}, \lt t}} \left[ \mathbb{1}_{ \{ t \le l_n \} } \cdot N_{\text{data}, \vec{\omega}_{\lt t}} \cdot H(P_{\text{data}}(\cdot\mid \vec{\omega}_{\lt t}),\,P_\theta(\cdot\mid \vec{\omega}_{\lt t})) \right] \\
 &= - \sum_{\vec{\omega}_{\lt t} \in \Omega_{\text{data}, \lt t}} \left[ \mathbb{1}_{ \{ t \le l_n \} } \cdot N_{\text{data}, \vec{\omega}_{\lt t}} \cdot \sum_{ \omega_t \in \mathcal{V} \cup \{ \text{<bos>} \} } P_{\text{data}}( \omega_t \mid  \vec{\omega}_{\lt t}) \cdot \log P_\theta( \omega_t \mid \vec{\omega}_{\lt t}) \right] \\
 &= - \sum_{\vec{\omega}_{\lt t} \in \Omega_{\text{data}, \lt t}} \left[ \mathbb{1}_{ \{ t \le l_n \} } \cdot \sum_{ \omega_t \in \mathcal{V} \cup \{ \text{<bos>} \} } N_{\text{data}, (\vec{\omega}_{\lt t}, \omega_t)}  \cdot \log P_\theta( \omega_t \mid \vec{\omega}_{\lt t}) \right] \\
 &= \sum_{n=1}^N \left[ \mathbb{1}_{ \{ t \le l_n \} } \cdot \left( - \log P_\theta( x^n_t \mid \vec{x}^n_{\lt t}) \right) \right]
@@ -1398,11 +1399,11 @@ Then we can get the sequence-level cross-entropy loss as
 
 $$
 \begin{aligned}
-H(P_{\text{data}}, P_{\theta}) \\
-= \underbrace{\frac{\mathrm{NLL}(1,1)+\mathrm{NLL}(2,1)+\mathrm{NLL}(3,1)+\mathrm{NLL}(4,1)+\mathrm{NLL}(5,1)}{5}}_{t=1} \\
-+ \underbrace{\frac{\mathrm{NLL}(1,2)+\mathrm{NLL}(2,2)+\mathrm{NLL}(3,2)+\mathrm{NLL}(4,2)+\mathrm{NLL}(5,2)}{5}}_{t=2} \\
-+ \underbrace{\frac{\mathrm{NLL}(2,3)+\mathrm{NLL}(3,3)+\mathrm{NLL}(4,3)+\mathrm{NLL}(5,3)}{4}}_{t=3} \\
-+ \underbrace{\frac{\mathrm{NLL}(4,4)+\mathrm{NLL}(5,4)}{2}}_{t=4}.
+H(P_{\text{data}}, P_{\theta}) 
+& = \underbrace{\frac{\mathrm{NLL}(1,1)+\mathrm{NLL}(2,1)+\mathrm{NLL}(3,1)+\mathrm{NLL}(4,1)+\mathrm{NLL}(5,1)}{5}}_{t=1} \\
+& + \underbrace{\frac{\mathrm{NLL}(1,2)+\mathrm{NLL}(2,2)+\mathrm{NLL}(3,2)+\mathrm{NLL}(4,2)+\mathrm{NLL}(5,2)}{5}}_{t=2} \\
+& + \underbrace{\frac{\mathrm{NLL}(2,3)+\mathrm{NLL}(3,3)+\mathrm{NLL}(4,3)+\mathrm{NLL}(5,3)}{4}}_{t=3} \\
+& + \underbrace{\frac{\mathrm{NLL}(4,4)+\mathrm{NLL}(5,4)}{2}}_{t=4}.
 \end{aligned}
 $$
 
