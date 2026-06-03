@@ -1713,7 +1713,7 @@ $$
 
 > **Note**
 >
-> In practice (and also in this nanochat-ascend project), we do not use SGD but AdamW/Muon algorithms. In particular, we use AdamW to optimize the embeddings and scalars, and use Muon to optimize the matrix parameters. See the code in [`nanochat/optim.py`](https://github.com/leideng/nanochat-ascend/blob/main/nanochat/optim.py). However, their basic ideas are still SGD but has better performance. I will discuss them some days later when I have time. For the time being, it is enough to understand the mini-batch SGD algorithm.
+> In practice (and also in this nanochat-ascend project), we do not use SGD but AdamW/Muon algorithms. In particular, we use AdamW to optimize the embeddings and scalars, and use Muon to optimize the matrix parameters. See the code in [`nanochat/optim.py`](https://github.com/leideng/nanochat-ascend/blob/ee840874991bafe039f0984aaf1e34bb348f4a7e/nanochat/optim.py). However, their basic ideas are still SGD but has better performance. I will discuss them some days later when I have time. For the time being, it is enough to understand the mini-batch SGD algorithm.
 
 ### 3.7. Pretraining Running and Logs
 
