@@ -1423,11 +1423,10 @@ of length up to 4K for pretraining. Then we have
 
 $$
 \begin{aligned}
-N
-&\ge \frac{10T}{4K}
+N \ge \frac{10T}{4K}
 = \frac{10 \times 10^{12}}{4096}
-= 2.44 \times 10^9 \\
-&\approx 2.5B \gg L_{\max} = 4096 = 4K.
+= 2.44 \times 10^9 
+\approx 2.5B \gg L_{\max} = 4096 = 4K.
 \end{aligned}
 $$
 
@@ -1517,16 +1516,16 @@ For such documents, we generally chunk them into sequences of length {::nomarkdo
 The tail sequence will either be padded or packed into a sequence of length {::nomarkdown}$L_{\max}${:/nomarkdown}.
 
 However, in our `nanochat-ascend` project, Karpathy uses a different approach, which is crop-based best-fit packing algorithm.
-As shown in [`nanochat/dataloader.py`](https://github.com/leideng/nanochat-ascend/blob/main/nanochat/dataloader.py), it works as follows
-- Every row starts with BOS token
+As shown in [`nanochat/dataloader.py`](https://github.com/leideng/nanochat-ascend/blob/ee840874991bafe039f0984aaf1e34bb348f4a7e/nanochat/dataloader.py), it works as follows
+- Every row starts with `<bos>` token
 - Documents packed using best-fit algorithm to minimize cropping
 - When no document fits remaining space, crops a document to fill exactly
-- 100% utilization (no padding), ~35% tokens cropped at T=2048
+- 100% utilization (no padding), ~35% tokens cropped at $L_{\max}=2048$
 
 In particular,  we compare this approach with standard concatenate-then-chunk approach as follows.
 
 ```text
-Concatenate-then-chunk (standard):          BOS-aligned bestfit (this code):
+Concatenate-then-chunk (standard):          BOS-aligned bestfit (nanochat-ascend):
 ─────────────────────────────────           ─────────────────────────────────
 <bos> doc1... ...    <bos> doc2...          <bos> docX ... <bos> docY_cropped
 ...doc2_continued... <bos> doc3..           <bos> docZ ... <bos> docW_cropped
@@ -1571,16 +1570,17 @@ Then we can get the approximate sequence-level cross-entropy loss as
 
 $$
 \begin{aligned}
-H(P_{\text{data}}, P_{\theta}) \\
-\approx \underbrace{\frac{\mathrm{NLL}(1,1)+\mathrm{NLL}(2,1)+\mathrm{NLL}(3,1)+\mathrm{NLL}(4,1)+\mathrm{NLL}(5,1)}{5}}_{t=1} \\
-+ \underbrace{\frac{\mathrm{NLL}(1,2)+\mathrm{NLL}(2,2)+\mathrm{NLL}(3,2)+\mathrm{NLL}(4,2)+\mathrm{NLL}(5,2)}{5}}_{t=2} \\
-+ \underbrace{\frac{\mathrm{NLL}(1,3)+\mathrm{NLL}(2,3)+\mathrm{NLL}(3,3)+\mathrm{NLL}(4,3)+\mathrm{NLL}(5,3)}{5}}_{t=3} \\
-+ \underbrace{\frac{\mathrm{NLL}(1,4)+\mathrm{NLL}(2,4)+\mathrm{NLL}(3,4)+\mathrm{NLL}(4,4)+\mathrm{NLL}(5,4)}{5}}_{t=4} \\
-= \frac{1}{5} \sum_{n=1}^5
+H(P_{\text{data}}, P_{\theta}) 
+& \approx \underbrace{\frac{\mathrm{NLL}(1,1)+\mathrm{NLL}(2,1)+\mathrm{NLL}(3,1)+\mathrm{NLL}(4,1)+\mathrm{NLL}(5,1)}{5}}_{t=1} \\
+& + \underbrace{\frac{\mathrm{NLL}(1,2)+\mathrm{NLL}(2,2)+\mathrm{NLL}(3,2)+\mathrm{NLL}(4,2)+\mathrm{NLL}(5,2)}{5}}_{t=2} \\
+& + \underbrace{\frac{\mathrm{NLL}(1,3)+\mathrm{NLL}(2,3)+\mathrm{NLL}(3,3)+\mathrm{NLL}(4,3)+\mathrm{NLL}(5,3)}{5}}_{t=3} \\
+& + \underbrace{\frac{\mathrm{NLL}(1,4)+\mathrm{NLL}(2,4)+\mathrm{NLL}(3,4)+\mathrm{NLL}(4,4)+\mathrm{NLL}(5,4)}{5}}_{t=4} \\
+& = \frac{1}{5} \sum_{n=1}^5
 \left[ \mathrm{NLL}(n,1)+\mathrm{NLL}(n,2)+\mathrm{NLL}(n,3)+\mathrm{NLL}(n,4) \right].
 \end{aligned}
 $$
 
+Therefore, we have changed from column-wise (position) summation into row-wise (data sample) summation.
 
 ### 3.6. Optimization via Mini-Batch SGD
 
