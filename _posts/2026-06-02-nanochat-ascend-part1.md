@@ -709,10 +709,9 @@ which serves as the foundation for next-token prediction paradigm.
 
 $$
 \begin{aligned}
-&P_{\text{truth}} (\omega_t \mid \vec{\omega}_{\lt t}) \\
-&= P_{\text{truth}} (\omega_t \mid \vec{\omega}_{\lt t}, \omega_{t+1}, \omega_{t+2}, \cdots, \omega_l), \\
-&\quad \forall \vec{\omega}=(\vec{\omega}_{\lt t}, \omega_t, \omega_{t+1}, \omega_{t+2}, \cdots, \omega_l) \in \Omega_{\text{truth}}, \\
-&\quad \forall t=1,2,\cdots, L_{\max}
+&P_{\text{truth}} (\omega_t \mid \vec{\omega}_{\lt t}) = P_{\text{truth}} (\omega_t \mid \vec{\omega}_{\lt t}, \omega_{t+1}, \omega_{t+2}, \cdots, \omega_l), \\
+&\quad \forall \vec{\omega}=(\vec{\omega}_{\lt t}, \omega_t, \omega_{t+1}, \omega_{t+2}, \cdots, \omega_l) \in \Omega_{\text{truth}}, 
+\quad \forall t=1,2,\cdots, L_{\max}.
 \end{aligned}
 $$
 
@@ -730,9 +729,9 @@ Since {::nomarkdown}$P_{\text{truth}} (\omega_t \mid \vec{w}_{\lt t})${:/nomarkd
 $$
 \begin{aligned}
 \Omega_{\text{truth}, t} = \Big\lbrace
-&\vec{\omega}_t = (\omega_1, \omega_2, \cdots, \omega_t): \\
-&\vec{w}=(\vec{\omega}_t, \omega_{t+1}, \cdots, \omega_{l}) \in \Omega_{\text{truth}}, l \ge t
-\Big\rbrace
+\vec{\omega}_t = (\omega_1, \omega_2, \cdots, \omega_t): 
+\vec{w}=(\vec{\omega}_t, \omega_{t+1}, \cdots, \omega_{l}) \in \Omega_{\text{truth}}, l \ge t
+\Big\rbrace.
 \end{aligned}
 $$
 
@@ -744,8 +743,8 @@ probability measure {::nomarkdown}$P_{\text{truth},t}${:/nomarkdown} on the samp
 
 $$
 \begin{aligned}
-&P_{\text{truth},t}(\vec{\omega}_t = (\omega_1, \omega_2, \cdots, \omega_t)) \\
-&= P_{\text{truth}}(\omega_1, \omega_2, \cdots, \omega_t), \qquad  1 \le t \le L_{\max}
+P_{\text{truth},t}(\vec{\omega}_t = (\omega_1, \omega_2, \cdots, \omega_t)) 
+= P_{\text{truth}}(\omega_1, \omega_2, \cdots, \omega_t), \qquad  1 \le t \le L_{\max}
 \end{aligned}
 $$
 
@@ -754,8 +753,8 @@ Then, we have
 $$
 \begin{aligned}
 P_{\text{truth}} (\vec{\omega})
-&= \prod_{t=1}^{l} P_{\text{truth}} (\omega_t \mid \vec{w}_{\lt t}) \\
-&= \prod_{t=1}^{l} P_{\text{truth},t} (\omega_t \mid \vec{w}_{\lt t}).
+= \prod_{t=1}^{l} P_{\text{truth}} (\omega_t \mid \vec{w}_{\lt t}) 
+= \prod_{t=1}^{l} P_{\text{truth},t} (\omega_t \mid \vec{w}_{\lt t}).
 \end{aligned}
 $$
 
@@ -765,8 +764,7 @@ $$
 \begin{aligned}
 P_{\text{truth}} ( \vec{y} | \vec{x} )
 &= \prod_{t=i}^{l} P_{\text{truth}} (y_t \mid x_1,x_2,\cdots,x_{i-1}, y_i, \cdots, y_{t-1}) \\
-&= \prod_{t=i}^{l} P_{\text{truth},t} (y_t \mid x_1,x_2,\cdots,x_{i-1}, y_i, \cdots, y_{t-1}), \\
-&\qquad i \ge 1
+&= \prod_{t=i}^{l} P_{\text{truth},t} (y_t \mid x_1,x_2,\cdots,x_{i-1}, y_i, \cdots, y_{t-1}), \qquad i \ge 1
 \end{aligned}
 $$
 
@@ -776,8 +774,8 @@ To facilitate the further analysis, we also define the sample space of all prefi
 $$
 \begin{aligned}
 \Omega_{\text{truth}, \lt t} = \Big\lbrace
-&\vec{\omega}_{\lt t} = (\omega_1, \omega_2, \cdots, \omega_{t-1}): \\
-&\vec{w}=(\vec{\omega}_{t-1}, \omega_t, \omega_{t+1}, \cdots, \omega_{l}) \in \Omega_{\text{truth}}, l \ge t
+\vec{\omega}_{\lt t} = (\omega_1, \omega_2, \cdots, \omega_{t-1}): 
+\vec{w}=(\vec{\omega}_{t-1}, \omega_t, \omega_{t+1}, \cdots, \omega_{l}) \in \Omega_{\text{truth}}, l \ge t
 \Big\rbrace.
 \end{aligned}
 $$
@@ -793,8 +791,8 @@ We only need $V+1$ numbers to represent {::nomarkdown}$P_{\text{truth},t} (\omeg
 
 $$
 \begin{aligned}
-&P_{\text{truth},t} (\omega_t = 1 \mid \vec{w}_{\lt t}), \quad \cdots, \quad P_{\text{truth},t} (\omega_t = V \mid \vec{w}_{\lt t}), \\
-&P_{\text{truth},t} (\omega_t = \text{<bos>}  \mid \vec{w}_{\lt t}).
+P_{\text{truth},t} (\omega_t = 1 \mid \vec{w}_{\lt t}), \quad \cdots, \quad P_{\text{truth},t} (\omega_t = V \mid \vec{w}_{\lt t}), 
+\quad P_{\text{truth},t} (\omega_t = \text{<bos>}  \mid \vec{w}_{\lt t}).
 \end{aligned}
 $$
 
