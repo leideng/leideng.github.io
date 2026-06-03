@@ -866,8 +866,8 @@ we can define another data-based empirical probability measure {::nomarkdown}$P_
 
 $$
 \begin{aligned}
-\Omega_{\text{data}} = \bigcup_{i=1}^N \lbrace \vec{x}^i \rbrace \subset \Omega_{\text{truth}}, \\
-P_{\text{data}} (\vec{\omega}) = \frac{ \sum_{i=1}^N \mathbb{1}_{ \{ \vec{x}^i = \vec{\omega} \}  } } {N}, \qquad \forall \vec{\omega} \in \Omega_{\text{data}},
+& \Omega_{\text{data}} = \bigcup_{n=1}^N \lbrace \vec{x}^n \rbrace \subset \Omega_{\text{truth}}, \\
+& P_{\text{data}} (\vec{\omega}) = \frac{ \sum_{n=1}^N \mathbb{1}_{ \{ \vec{x}^n = \vec{\omega} \}  } } {N}, \qquad \forall \vec{\omega} \in \Omega_{\text{data}},
 \end{aligned}
 $$
 
@@ -880,8 +880,8 @@ it is very important that {::nomarkdown}$P_{\text{data}}${:/nomarkdown} is close
 
 $$
 \begin{aligned}
-\Omega_{\text{data}} \to \Omega_{\text{truth}}, \\
-P_{\text{data}} (\vec{\omega}) \to P_{\text{truth}} (\vec{\omega}).
+& \Omega_{\text{data}} \to \Omega_{\text{truth}}, \\
+& P_{\text{data}} (\vec{\omega}) \to P_{\text{truth}} (\vec{\omega}).
 \end{aligned}
 $$
 
@@ -896,13 +896,14 @@ Specifically, we derive the data-based empirical token-level conditional probabi
 
 $$
 \begin{aligned}
-N_{\text{data}, \vec{\omega}_{\lt t}}
-&= \sum_{n=1}^N \mathbb{1}_{ \left\{ t \le l_n, \text{ and the first } t-1 \text{ tokens of } \vec{x}^n \text{ is } \vec{\omega}_{\lt t} \right\} } \\
-N_{\text{data}, (\vec{\omega}_{\lt t}, \omega_t) }
-&= \sum_{n=1}^N \mathbb{1}_{ \left\{ t \le l_n, \text{ and the first } t \text{ tokens of } \vec{x}^n \text{ is } (\vec{\omega}_{\lt t}, \omega_t) \right\} } \\
-P_{\text{data}, t}(\vec{\omega}_{\lt t}, \omega_t)
-&= \frac{ N_{\text{data}, (\vec{\omega}_{\lt t}, \omega_t) } }{ \sum_{n=1}^N \mathbb{1}_{ \{ t \le l_n \}}  }, \qquad \forall (\vec{\omega}_{\lt t}, \omega_t) \in \Omega_{\text{data}, t}  \\
-P_{\text{data}, t}(\,\omega_t \mid \vec{\omega}_{\lt t}) &=
+& N_{\text{data}, \vec{\omega}_{\lt t}}
+= \sum_{n=1}^N \mathbb{1}_{ \left\{ t \le l_n, \text{ and the first } t-1 \text{ tokens of } \vec{x}^n \text{ is } \vec{\omega}_{\lt t} \right\} } \\
+& N_{\text{data}, (\vec{\omega}_{\lt t}, \omega_t) }
+= \sum_{n=1}^N \mathbb{1}_{ \left\{ t \le l_n, \text{ and the first } t \text{ tokens of } \vec{x}^n \text{ is } (\vec{\omega}_{\lt t}, \omega_t) \right\} } \\
+& P_{\text{data}, t}(\vec{\omega}_{\lt t}, \omega_t)
+= \frac{ N_{\text{data}, (\vec{\omega}_{\lt t}, \omega_t) } }{ \sum_{n=1}^N \mathbb{1}_{ \{ t \le l_n \}}  }, \qquad \forall (\vec{\omega}_{\lt t}, \omega_t) \in \Omega_{\text{data}, t}  \\
+& P_{\text{data}, t}(\,\omega_t \mid \vec{\omega}_{\lt t}) 
+=
 \begin{cases}
     \frac{ N_{\text{data}, (\vec{\omega}_{\lt t}, \omega_t) } } { N_{\text{data}, \vec{\omega}_{\lt t}} }; \text{ if }  N_{\text{data}, \vec{\omega}_{\lt t}} \gt 0 \\
     0; \text{ otherwise.}
@@ -921,8 +922,8 @@ Similar to {::nomarkdown}$\Omega_{\text{truth}, \lt t}${:/nomarkdown}, we also d
 $$
 \begin{aligned}
 \Omega_{\text{data}, \lt t} = \Big\lbrace
-&\vec{\omega}_{\lt t} = (\omega_1, \omega_2, \cdots, \omega_{t-1}): \\
-&\vec{w}=(\vec{\omega}_{t-1}, \omega_t, \omega_{t+1}, \cdots, \omega_{l}) \in \Omega_{\text{data}}, l \ge t
+\vec{\omega}_{\lt t} = (\omega_1, \omega_2, \cdots, \omega_{t-1}): 
+\vec{w}=(\vec{\omega}_{t-1}, \omega_t, \omega_{t+1}, \cdots, \omega_{l}) \in \Omega_{\text{data}}, l \ge t
 \Big\rbrace.
 \end{aligned}
 $$
