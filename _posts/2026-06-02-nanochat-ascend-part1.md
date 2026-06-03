@@ -960,8 +960,8 @@ Now we can define KL divergence. However, we still has another problem: KL diver
 $$
 \begin{aligned}
 \mathrm{KL}\!\left(P_{\text{data}} \,\|\, P_\theta\right)
-&= \sum_{\vec{\omega}\in\Omega_{\theta}} P_{\text{data}}(\vec{\omega}) \log \frac{P_{\text{data}}(\vec{\omega})}{P_\theta(\vec{\omega})} \\
-&= \sum_{\vec{\omega}\in\Omega_{\text{data}}} P_{\text{data}}(\vec{\omega}) \log \frac{P_{\text{data}}(\vec{\omega})}{P_\theta(\vec{\omega})}.
+= \sum_{\vec{\omega}\in\Omega_{\theta}} P_{\text{data}}(\vec{\omega}) \log \frac{P_{\text{data}}(\vec{\omega})}{P_\theta(\vec{\omega})} 
+= \sum_{\vec{\omega}\in\Omega_{\text{data}}} P_{\text{data}}(\vec{\omega}) \log \frac{P_{\text{data}}(\vec{\omega})}{P_\theta(\vec{\omega})}.
 \end{aligned}
 $$
 
@@ -969,14 +969,12 @@ The other is the reverse KL divergence defined by
 
 $$
 \begin{aligned}
-\mathrm{KL}\!\left(P_\theta \,\|\, P_{\text{data}}\right) \\
+\mathrm{KL}\!\left(P_\theta \,\|\, P_{\text{data}}\right) 
 = \sum_{\vec{\omega}\in\Omega_{\theta}} P_\theta(\vec{\omega}) \log \frac{P_\theta(\vec{\omega})}{P_{\text{data}}(\vec{\omega})}.
 \end{aligned}
 $$
 
-These two are not equal because KL divergence is not a symmetric distance. Which one should we use for pretraining?
-
-We use the **forward** direction {::nomarkdown}$\mathrm{KL}(P_{\text{data}}\|P_\theta)${:/nomarkdown} for the following two reasons:
+These two are not equal because KL divergence is not a symmetric distance. Which one should we use for pretraining? We use the **forward** direction {::nomarkdown}$\mathrm{KL}(P_{\text{data}}\|P_\theta)${:/nomarkdown} for the following two reasons:
 
 
 1. **Mode-covering (zero-forcing).** If {::nomarkdown}$P_{\text{data}}(\vec{\omega}) \gt 0${:/nomarkdown} but {::nomarkdown}$P_\theta(\vec{\omega}) = 0${:/nomarkdown}, then {::nomarkdown}$\log\frac{P_{\text{data}}(\vec{\omega})}{P_\theta(\vec{\omega})} = +\infty${:/nomarkdown} and the objective is infinite. The optimizer for forward KL divergence is therefore pushed to assign **positive** probability to every sequence that appears in the pretraining corpus. This is what we want for pretraining: cover the world knowledge as much as possible, compress and explain them, and do not ignore rare but real patterns.
