@@ -485,6 +485,38 @@ img {
   font-size: 1.05rem;
 }
 
+.blog-page-title {
+  margin: 0 0 1.4rem;
+  color: var(--heading);
+  font-size: 1.45rem;
+  line-height: 1.2;
+}
+
+.blog-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.blog-list li {
+  margin-bottom: 1.7rem;
+}
+
+.blog-list a {
+  display: block;
+  color: var(--accent);
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.blog-list time {
+  display: block;
+  margin-top: 0.3rem;
+  color: var(--muted);
+  font-size: 1rem;
+}
+
 code {
   padding: 0.1rem 0.3rem;
   border-radius: 0.2rem;
