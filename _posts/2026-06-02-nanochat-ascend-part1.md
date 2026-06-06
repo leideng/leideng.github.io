@@ -5,6 +5,8 @@ description: "A walkthrough of training Karpathy's nanochat on Ascend NPUs, cove
 use_math: true
 ---
 
+![NanoChat-Ascend logo]({{ '/assets/images/nanochat-ascend-logo.png' | relative_url }})
+
 ## 0. Introduction
 
 I have worked on LLM inference for two years, and I have always been curious about how an LLM is trained to reach such a human-like level of intelligence. I knew I would not deeply understand it unless I trained one from scratch myself. So I started the [nanochat-ascend](https://github.com/leideng/nanochat-ascend) project during the Lunar New Year holiday and spent about three months on it in my spare time.
